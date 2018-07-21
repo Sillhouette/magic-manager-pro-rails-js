@@ -1,0 +1,14 @@
+<%= form_for @user do |f| %>
+  <%= f.label :name, "Name:" %> </br>
+  <%= f.text_field :name, placeholder: "Required" %></br>
+
+  <%= f.label :dci_number, "DCI Number:"%> </br>
+  <%= f.number_field :dci_number, placeholder: "Optional" %> </br>
+
+  <%= f.label :password, "Password:" %> </br>
+  <%= f.password_field :password, placeholder: "Required" %> </br>
+
+  </br>
+
+  <%= f.submit "Create User" %>
+<% end %>

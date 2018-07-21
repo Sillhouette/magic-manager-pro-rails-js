@@ -1,0 +1,29 @@
+<%= form_tag(logout_path, method: "delete", :style => "float: right;" ) do %>
+  <%= submit_tag("Logout")%>
+<% end %>
+
+<fieldset>
+  <legend><h2><%=@user.name.titlecase%>: </h2></legend>
+
+  <fieldset>
+    <%= form_tag(new_deck_path, method: "get") do %>
+      <h4 style="display: inline-block">Decks: <%= submit_tag("Create New Deck") %></h4></br>
+    <% end %>
+
+    <%@user.decks.each do |deck| %>
+      <%= link_to deck.name, deck_path(deck)%> </br>
+    <%end %>
+  </fieldset>
+
+  </br></br>
+
+  <fieldset>
+    <%= form_tag(new_magic_card_path, method: "get") do %>
+      <h4 style="display: inline-block">Cards: <%= submit_tag("Create New Card") %></h4></br>
+    <% end %>
+
+    <%@user.magic_cards.each do |card| %>
+      <%= link_to card.name, card_path(card)%> </br>
+    <%end %>
+  </fieldset>
+</fieldset>
