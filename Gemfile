@@ -30,7 +30,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'mtg_sdk'
 
 gem 'omniauth'
-gem 'omniauth-facebook'
+gem 'omniauth-facebook', '~> 4.0'
 gem 'dotenv-rails'
 
 gem 'thin'

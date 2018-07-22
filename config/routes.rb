@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :decks
 
   get '/login' => 'sessions#new'
-  #post '/login' => 'sessions#create'
+  post '/login' => 'sessions#create'
   get '/auth/facebook/callback' => 'sessions#create'
   delete '/logout' => 'sessions#destroy'
 
