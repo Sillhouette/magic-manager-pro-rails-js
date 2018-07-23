@@ -1,2 +1,0 @@
-class DeckListsController < ApplicationController
-end

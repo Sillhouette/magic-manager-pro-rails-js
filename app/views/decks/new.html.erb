@@ -1,0 +1,19 @@
+<%= form_tag(logout_path, method: "delete", :style => "float: right;" ) do %>
+  <%= submit_tag("Logout")%>
+<% end %>
+
+<fieldset>
+  <legend><h2>Create a New Deck: </h2></legend>
+
+  <%= form_for @deck do |f| %>
+    <%= f.label :name, "First Name" %>:
+    <%= f.text_field :name, list: 'first-name' %>
+    <datalist id="first-name">
+      <% MagicCard.all.each do |card| %>
+        <option value="<%= card.name + " - " + card.setname%>"></option>
+      <% end %>
+    </datalist>
+    <%= f.submit %>
+  <% end %>
+
+</fieldset>

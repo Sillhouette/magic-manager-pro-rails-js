@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_21_000802) do
+ActiveRecord::Schema.define(version: 2018_07_22_190704) do
 
   create_table "deck_cards", force: :cascade do |t|
     t.integer "deck_id"
@@ -78,7 +78,7 @@ ActiveRecord::Schema.define(version: 2018_07_21_000802) do
     t.integer "user_id"
     t.integer "magic_card_id"
     t.string "quality"
-    t.float "value"
+    t.string "value"
     t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

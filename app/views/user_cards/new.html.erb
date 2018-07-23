@@ -1,0 +1,39 @@
+<%= form_tag(logout_path, method: "delete", :style => "float: right;" ) do %>
+  <%= submit_tag("Logout")%>
+<% end %>
+
+<fieldset>
+  <legend><h2>Add a new card to your Account: </h2></legend>
+
+  <%= form_for @card do |f| %>
+    <%= f.label :magic_card_name, "Card Name" %>:
+    <%= f.text_field :magic_card_name, list: 'card-name' %>
+    <datalist id="card-name">
+      <% MagicCard.all.each do |card| %>
+        <option value="<%=card.name + " - " + card.setname%>"></option>
+      <% end %>
+    </datalist>
+
+    </br></br>
+
+    <%= f.label :quantity, "Quantity" %>:
+    <%= f.number_field :quantity%>
+
+    </br></br>
+
+    <%= f.label :value, "Describe the value of each card" %>:
+    </br>
+    <%= f.text_area :value%>
+
+    </br></br>
+
+    <%= f.label :quality, "Describe the quality of each card" %>:
+    </br>
+    <%= f.text_area :quality%>
+
+    </br></br>
+
+    <%= f.submit %>
+  <% end %>
+
+</fieldset>

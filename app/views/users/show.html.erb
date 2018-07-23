@@ -6,9 +6,7 @@
   <legend><h2><%=@user.name.titlecase%>: </h2></legend>
 
   <fieldset>
-    <%= form_tag(new_deck_path, method: "get") do %>
-      <h4 style="display: inline-block">Decks: <%= submit_tag("Create New Deck") %></h4></br>
-    <% end %>
+    <h4>Decks: <%=link_to button_tag("Create New Deck"), new_deck_path %></h4>
 
     <%@user.decks.each do |deck| %>
       <%= link_to deck.name, deck_path(deck)%> </br>
@@ -18,12 +16,8 @@
   </br></br>
 
   <fieldset>
-    <%= form_tag(new_magic_card_path, method: "get") do %>
-      <h4 style="display: inline-block">Cards: <%= submit_tag("Create New Card") %></h4></br>
-    <% end %>
+    <h4>Cards: <%=link_to button_tag("Add New Card(s)"), new_user_card_path %></h4>
 
-    <%@user.magic_cards.each do |card| %>
-      <%= link_to card.name, card_path(card)%> </br>
-    <%end %>
+    <%= render partial: "user_cards/index_list", locals: {update_delete_buttons: true} %>
   </fieldset>
 </fieldset>

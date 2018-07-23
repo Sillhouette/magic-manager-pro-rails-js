@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   resources :users
-  resources :deck_lists
+  resources :deck_cards
   resources :magic_cards
   resources :decks
+  resources :user_cards
 
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'

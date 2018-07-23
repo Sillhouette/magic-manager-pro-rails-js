@@ -1,0 +1,8 @@
+<%current_user.user_cards.each do |card| %>
+  <p style>
+    <%= link_to card.magic_card_name, user_card_path(card)%>
+    <% if update_delete_buttons %>
+      <%=button_to "Edit Card", edit_user_card_path(card), method: "get" %> <%=button_to "Delete Card", card, :method => :delete%>
+    <% end %>
+  </p>
+<%end %>
