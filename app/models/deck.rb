@@ -20,9 +20,9 @@ class Deck < ApplicationRecord
 
   def deck_cards_attributes=(deck_card_attributes)
     deck_card_attributes.values.each do |deck_card_attribute|
-      binding.pry
-      deck_card = DeckCard.find_or_create_by(deck_card_attribute)
-      #self.deck_cards << deck_card
+      if deck_card_attribute[:user_card_id] != "-1"
+        self.deck_cards.build(deck_card_attribute)
+      end
     end
   end
 

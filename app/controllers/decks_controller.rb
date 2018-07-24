@@ -16,7 +16,6 @@ class DecksController < ApplicationController
 
   def create
     @deck = current_user.decks.create(deck_params)
-    binding.pry
     if @deck.save
       redirect_to decks_path
     else
@@ -27,6 +26,12 @@ class DecksController < ApplicationController
 
   def update
     raise params.inspect
+  end
+
+  def destroy
+    @deck = Deck.find_by(id: params[:id])
+    @deck.delete
+    redirect_to decks_path
   end
 
   def deck_params
