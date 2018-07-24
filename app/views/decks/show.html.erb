@@ -1,0 +1,15 @@
+<fieldset>
+  <legend><h2><%=@deck.name.titlecase%>: </h2></legend>
+
+  <%= form_for @deck do |f| %>
+
+    <h4><%= f.label :format, "Format:" %>
+    </br>
+      <%= f.text_field :format, :disabled => true %>
+    </h4>
+
+    <br/><br/>
+    <%= f.submit "Add Cards to Deck"%>
+
+  <% end %>
+</fieldset>

@@ -1,0 +1,25 @@
+<fieldset>
+  <legend><h2><%=current_user.name.titlecase%>'s Decks: </h2></legend>
+
+    <%=link_to button_tag("Add New Deck"), new_deck_path %>
+
+    <br/> <br/>
+
+  <%current_user.decks.each do |deck| %>
+    <fieldset>
+      <legend><h4><%= deck.name%>
+        <%=button_to "View Details", deck_path(deck), method: "get", form: { style: "display:inline-block"} %>
+        <%=button_to "Edit", edit_deck_path(deck), method: "get", form: { style: "display:inline-block"} %>
+        <%=button_to "Delete", deck, :method => :delete, form: { style: "display:inline-block"} %>
+      </h4></legend>
+
+      <p>
+        <%= "Format: #{deck.format}" %> <br/>
+        <%= "Cards: #{deck.deck_cards.count}" %>
+      </p>
+    </fieldset>
+
+    <br/>
+
+  <%end %>
+</fieldset>

@@ -8,10 +8,6 @@
   <fieldset>
     <h4><%=link_to button_tag("View My Decks"), decks_path %></h4>
 
-    <%@user.decks.each do |deck| %>
-      <%= link_to deck.name, deck_path(deck)%> </br>
-    <%end %>
-
     <h4><%=link_to button_tag("View My Cards"), user_cards_path %></h4>
   </fieldset>
 

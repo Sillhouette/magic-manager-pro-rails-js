@@ -6,6 +6,25 @@ class Deck < ApplicationRecord
   has_many :deck_cards, dependent: :destroy
   has_many :user_cards, through: :deck_cards
   has_many :magic_cards, through: :user_cards
+  accepts_nested_attributes_for :deck_cards
+
+  FORMATS = [ "Standard", "Modern", "Legacy", "Vintage", "Sealed Deck", "Booster Draft", "Rochester Draft",
+              "Two-Headed Giant", "Pauper", "Peasant", "Frontier", "Rainbow Stairwell", "Singleton", "Tribal Wars",
+              "Cube Draft", "Back Draft", "Reject Rare Draft", "Type 4", "Free-For-All", "Star", "Assassin", "Emperor",
+              "Vanguard", "Planar Magic", "Archenemy", "Commander", "Brawl", "Mental Magic", "Mini-Magic", "Horde Magic",
+              "QL Magic", "Fat Stack/Tower of Power", "Pack War", "Penny Dreadful", "Commander Adventures", "Old School" ]
+
+  def self.formats
+    FORMATS
+  end
+
+  def deck_cards_attributes=(deck_card_attributes)
+    deck_card_attributes.values.each do |deck_card_attribute|
+      binding.pry
+      deck_card = DeckCard.find_or_create_by(deck_card_attribute)
+      #self.deck_cards << deck_card
+    end
+  end
 
   # I dont think i need these options in a database, I can just check names against ban/restricted lists
   # t.boolean :standard
