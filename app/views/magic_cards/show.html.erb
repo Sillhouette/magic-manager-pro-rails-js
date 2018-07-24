@@ -1,0 +1,48 @@
+<fieldset>
+  <legend><h2><%= @card.name %></h2></legend>
+
+    <p><%="Layout: #{@card.layout.titlecase}" if @card.layout%></p>
+    <p><%="CMC: #{@card.cmc.titlecase}" if @card.cmc%></p>
+    <p><%="Colors: #{@card.colors.titlecase}" if @card.colors%></p>
+    <p><%="Color Identity: #{ @card.color_identity.titlecase}" if @card.color_identity%></p>
+    <p><%="Type: #{@card.card_type.titlecase}" if @card.card_type%></p>
+
+    <% if @card.image_url %>
+      <img src="<%=@card.image_url%>", style="float:right">
+    <% end%>
+
+    <p><%="Supertypes: #{@card.supertypes.titlecase}" if @card.supertypes%></p>
+    <p><%="Types: #{@card.types.titlecase}" if @card.types%></p>
+    <p><%="Subtypes: #{@card.subtypes.titlecase}" if @card.subtypes%></p>
+    <p><%="Rarity: #{@card.rarity.titlecase}" if @card.rarity%></p>
+    <p><%="Set Code: #{@card.set_code.upcase}" if @card.set_code%></p>
+    <p><%="Setname: #{@card.setname.titlecase}" if @card.setname%></p>
+    <p><%="Text: #{@card.text}" if @card.text%></p>
+    <p><%="Flavor: #{@card.flavor}" if @card.flavor%></p>
+    <p><%="Artist: #{@card.artist.titlecase}" if @card.artist%></p>
+    <p><%="Number: #{@card.number.titlecase}" if @card.number%></p>
+    <p><%="Power: #{@card.power.titlecase}" if @card.power%></p>
+    <p><%="Toughness: #{@card.toughness.titlecase}" if @card.toughness%></p>
+    <p><%="Loyalty: #{@card.loyalty.titlecase}" if @card.loyalty%></p>
+    <p><%="Multiverse ID: #{@card.multiverse_id.titlecase}" if @card.multiverse_id%></p>
+    <p><%="Other Names: #{@card.other_names.titlecase}" if @card.other_names%></p>
+    <p><%="Mana Cost: #{@card.mana_cost.titlecase}" if @card.mana_cost%></p>
+    <p><%="Variations: #{@card.variations.titlecase}" if @card.variations%></p>
+    <p><%="Image URL: #{@card.image_url}" if @card.image_url%></p>
+    <p><%="Watermark: #{@card.watermark.titlecase}" if @card.watermark%></p>
+    <p><%="Border: #{@card.border.titlecase}" if @card.border%></p>
+    <p><%="Timeshifted: #{@card.timeshifted.titlecase}" if @card.timeshifted%></p>
+    <p><%="Hand: #{@card.hand.titlecase}" if @card.hand%></p>
+    <p><%="Life: #{@card.life.titlecase}" if @card.life%></p>
+    <p><%="Reserved: #{@card.reserved.titlecase}" if @card.reserved%></p>
+    <p><%="Release Date: #{@card.release_date.titlecase}" if @card.release_date%></p>
+    <p><%="Starter: #{@card.starter.titlecase}" if @card.starter%></p>
+    <p><%="Rulings: #{@card.rulings}" if @card.rulings%></p>
+    <p><%="Original Text: #{@card.original_text}" if @card.original_text%></p>
+    <p><%="Original Type: #{@card.original_type}" if @card.original_type%></p>
+    <p><%="Legalities: #{@card.legalities.titlecase}" if @card.legalities%></p>
+    <p><%="Source: #{@card.source.titlecase}" if @card.source%></p>
+
+     <%=link_to button_tag("Back to Index"), user_cards_path%>
+
+</fieldset>

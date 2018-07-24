@@ -51,7 +51,7 @@ class MagicCard < ApplicationRecord
           card_info[:reserved] = card["reserved"] if card["reserved"] # boolean
           card_info[:release_date] = card["releaseDate"] if card["releaseDate"] #string
           card_info[:starter] = card["starter"] if card["starter"] #boolean
-          card_info[:rulings] = card["rulings"].collect { |hash| "#{hash["date"]} => #{hash["text"]}"}.join("\n") if card["rulings"]# => array of hashes
+          card_info[:rulings] = card["rulings"].collect { |hash| "#{hash["date"]}: #{hash["text"]}"}.join("\n") if card["rulings"]# => array of hashes
           card_info[:original_text] = card["originalText"] if card["originalText"] #string
           card_info[:original_type] = card["originalType"] if card["originalType"] #string
           card_info[:legalities] = card["legalities"].collect { |hash| "#{hash["format"]} => #{hash["legality"]}"}.join("\n") if card["legalities"]#array of hashes

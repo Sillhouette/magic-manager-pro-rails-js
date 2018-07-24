@@ -1,1 +1,6 @@
-thisisausercardeditpage
+<fieldset>
+  <legend><h2>Edit <%= @card.magic_card.name%>: </h2></legend>
+
+  <%= render partial: "user_card_form", locals: {editing: true}  %>
+
+</fieldset>

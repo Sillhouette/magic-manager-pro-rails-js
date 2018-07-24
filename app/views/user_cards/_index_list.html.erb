@@ -1,8 +1,37 @@
 <%current_user.user_cards.each do |card| %>
-  <p style>
-    <%= link_to card.magic_card_name, user_card_path(card)%>
-    <% if update_delete_buttons %>
-      <%=button_to "Edit Card", edit_user_card_path(card), method: "get" %> <%=button_to "Delete Card", card, :method => :delete%>
+  <fieldset>
+    <legend><h4><%= card.magic_card_name%>
+      <% if update_delete_buttons %>
+        <%=button_to "View Details", magic_card_path(card.magic_card_id), method: "get", form: { style: "display:inline-block"} %>
+        <%=button_to "Edit", edit_user_card_path(card), method: "get", form: { style: "display:inline-block"} %>
+        <%=button_to "Delete", card, :method => :delete, form: { style: "display:inline-block"} %>
+      <% end %></h4>
+    </legend>
+
+    <% if MagicCard.find_by(id: card.magic_card_id).image_url %>
+      <img src="<%=MagicCard.find(card.magic_card_id).image_url%>", style="float:right">
     <% end %>
-  </p>
+
+    <p>
+      <%= "Quantity: #{card.quantity}" %>
+
+      <%= form_for card do |f| %>
+
+        <%= f.label :value, "Value(s):" %>
+        </br>
+        <%= f.text_area :value, :disabled => true %>
+
+        </br></br>
+
+        <%= f.label :quality, "Quality:" %>
+        </br>
+        <%= f.text_area :quality, :disabled => true %>
+
+      <% end %>
+    </p>
+
+  </fieldset>
+
+  <br/>
+
 <%end %>

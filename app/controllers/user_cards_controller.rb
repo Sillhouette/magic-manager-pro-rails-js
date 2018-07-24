@@ -1,4 +1,8 @@
 class UserCardsController < ApplicationController
+
+  def index
+  end
+
   def new
     @card = UserCard.new
   end
@@ -10,12 +14,32 @@ class UserCardsController < ApplicationController
     else
       @card = current_user.user_cards.build(user_card_params) #use .create instead of build?
       if @card.save
-        redirect_to user_path(@user)
+        redirect_to user_cards_path
       else
         flash[:error] = "You tried to add an invalid card, please try again."
         render :new
       end
     end
+  end
+
+  def edit
+    @card = UserCard.find_by(id: params[:id])
+  end
+
+  def update
+    @card = UserCard.find_by(id: params[:id])
+    if @card.update(user_card_params)
+      redirect_to user_cards_path
+    else
+      flash[:error] = "The update failed, please try again."
+      render :edit
+    end
+  end
+
+  def destroy
+    @card = UserCard.find_by(id: params[:id])
+    @card.delete
+    redirect_to user_cards_path
   end
 
   private

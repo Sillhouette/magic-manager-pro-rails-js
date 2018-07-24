@@ -10,6 +10,13 @@
   </head>
 
   <body>
+    <% if logged_in? %>
+      <div style="float:right;display:inline">
+        <%= render partial: "./logout_button"%>
+        <%= link_to button_tag("Profile Page"), user_path(current_user), :style => "float: right;" %>
+      </div>
+    <% end %>
+
     <% if flash[:error] %>
       <p id="notice"><%= flash[:error] %></p>
     <% end %>

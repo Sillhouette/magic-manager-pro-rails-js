@@ -1,0 +1,10 @@
+<fieldset>
+  <legend><h2><%=current_user.name.titlecase%>'s Cards: </h2></legend>
+
+    <%=link_to button_tag("Add New Card"), new_user_card_path %>
+
+    <br/> <br/>
+
+    <%= render partial: "user_cards/index_list", locals: {update_delete_buttons: true} %>
+
+</fieldset>

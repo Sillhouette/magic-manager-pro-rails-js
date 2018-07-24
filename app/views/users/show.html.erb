@@ -1,23 +1,18 @@
-<%= form_tag(logout_path, method: "delete", :style => "float: right;" ) do %>
-  <%= submit_tag("Logout")%>
-<% end %>
-
 <fieldset>
   <legend><h2><%=@user.name.titlecase%>: </h2></legend>
 
+  <%=link_to button_tag("Edit Profile"), edit_user_path(@user) %>
+
+  <br/><br/>
+
   <fieldset>
-    <h4>Decks: <%=link_to button_tag("Create New Deck"), new_deck_path %></h4>
+    <h4><%=link_to button_tag("View My Decks"), decks_path %></h4>
 
     <%@user.decks.each do |deck| %>
       <%= link_to deck.name, deck_path(deck)%> </br>
     <%end %>
+
+    <h4><%=link_to button_tag("View My Cards"), user_cards_path %></h4>
   </fieldset>
 
-  </br></br>
-
-  <fieldset>
-    <h4>Cards: <%=link_to button_tag("Add New Card(s)"), new_user_card_path %></h4>
-
-    <%= render partial: "user_cards/index_list", locals: {update_delete_buttons: true} %>
-  </fieldset>
 </fieldset>
