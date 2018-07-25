@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_25_062227) do
+ActiveRecord::Schema.define(version: 2018_07_25_160021) do
 
   create_table "deck_cards", force: :cascade do |t|
     t.integer "deck_id"
@@ -21,7 +21,6 @@ ActiveRecord::Schema.define(version: 2018_07_25_062227) do
     t.boolean "main_board_option"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "persist"
   end
 
   create_table "decks", force: :cascade do |t|

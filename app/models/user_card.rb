@@ -17,6 +17,6 @@ class UserCard < ApplicationRecord
   end
 
   def magic_card_name=(name)
-    self.magic_card = MagicCard.find_by(name: name.split(" - ")[0])
+    self.magic_card = MagicCard.find_by(name: name.split(" - ")[0], setname: name.split(" - ")[1])
   end
 end

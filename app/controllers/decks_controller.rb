@@ -25,14 +25,15 @@ class DecksController < ApplicationController
   end
 
   def edit
-    @deck = Deck.find_by(id: params[:id])
-    current_user.user_cards.each do |card|
+    @deck = Deck.find(params[:id])
+    diff = current_user.user_cards - @deck.user_cards
+    diff.each do |card|
       @deck.deck_cards.build(user_card: card)
     end
   end
 
   def update
-    @deck = Deck.find_by(id: params[:id])
+    @deck = Deck.find(params[:id])
     if @deck.update(deck_params)
       redirect_to decks_path
     else

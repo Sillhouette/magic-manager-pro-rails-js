@@ -13,9 +13,10 @@
 
     <div>
 
-      <%= deck_card_builder.check_box :persist, {}, true, false %>
-      <%= deck_card_builder.label :persist, "#{deck_card_builder.object.user_card.magic_card_name}:" %>
-      <%= deck_card_builder.hidden_field :user_card_id %>
+      <% card_id = deck_card_builder.object.user_card.id %>
+      <%= deck_card_builder.check_box :user_card_id, {checked: deck_card_builder.object.id ? true : false}, card_id, -card_id  %>
+      <%= deck_card_builder.label :user_card_id, "#{deck_card_builder.object.user_card.magic_card_name}:" %>
+
       <br/>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= deck_card_builder.label :main_board_quantity, "Main board quantity:" %>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= deck_card_builder.number_field :main_board_quantity %>
