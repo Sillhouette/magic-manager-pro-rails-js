@@ -1,7 +1,7 @@
 class UserCard < ApplicationRecord
   belongs_to :user
   belongs_to :magic_card
-  has_many :deck_cards
+  has_many :deck_cards, dependent: :destroy
   has_many :decks, through: :deck_cards
 
   def self.find_by_full_name(name)

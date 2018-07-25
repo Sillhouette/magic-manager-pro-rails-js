@@ -3,7 +3,7 @@ class MagicCard < ApplicationRecord
   include Slugable::InstanceMethods
   extend Slugable::ClassMethods
 
-  has_many :user_cards
+  has_many :user_cards, dependent: :destroy
   has_many :users, through: :user_cards
 
   def self.parse_json

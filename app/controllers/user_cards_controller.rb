@@ -38,7 +38,7 @@ class UserCardsController < ApplicationController
 
   def destroy
     @card = UserCard.find_by(id: params[:id])
-    @card.delete
+    @card.destroy
     redirect_to user_cards_path
   end
 

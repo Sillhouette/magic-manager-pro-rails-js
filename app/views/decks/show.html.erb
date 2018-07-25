@@ -9,7 +9,21 @@
     </h4>
 
     <br/><br/>
-    <%= f.submit "Add Cards to Deck"%>
 
   <% end %>
+
+    <% @deck.deck_cards.each do |card| %>
+      <div>
+        <fieldset>
+          <legend><h3><%=MagicCard.find_by(id: UserCard.find(card.user_card_id).magic_card_id).name %></h3></legend>
+          <% if MagicCard.find_by(id: UserCard.find(card.user_card_id).magic_card_id).image_url %>
+            <img src="<%=MagicCard.find_by(id: UserCard.find_by(id: card.user_card_id).magic_card_id).image_url%>", style="float:right">
+          <% end %>
+          <%= "Main Board: #{card.main_board_quantity ? card.main_board_quantity : 0}" %><br/><br/><br/><br/>
+          <%= "Side Board: #{card.side_board_quantity ? card.side_board_quantity : 0}" %><br/><br/><br/><br/>
+          <%= "Main Board Option: #{ card.main_board_option ? card.main_board_option : "False"}" %><br/><br/><br/><br/>
+          <%= "Side Board Option: #{ card.side_board_option ? card.side_board_option : "False"}" %><br/><br/><br/><br/>
+        </fieldset>
+      </div>
+      <% end %>
 </fieldset>

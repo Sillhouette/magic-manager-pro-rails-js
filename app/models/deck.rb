@@ -18,11 +18,21 @@ class Deck < ApplicationRecord
     FORMATS
   end
 
+  ##
+  # => Cycles through nested attributes, pulls the attributes for a single deck_card, checks if the card is in deck already and if so updates
+  # => if not it creates the card. This also handles deleting any deck_cards that have an invalid user_card_id due to the way we had to handle
+  # => the checkboxes on the forms.
+  ##
   def deck_cards_attributes=(deck_card_attributes)
    deck_card_attributes.values.each do |deck_card_attribute|
-     if deck_card_attribute[:user_card_id].to_i > 0 && !self.deck_cards.pluck(:user_card_id).include?(deck_card_attribute[:user_card_id].to_i)
-       self.deck_cards.build(deck_card_attribute)
-     elsif deck_card_attribute[:user_card_id].to_i < 0 && self.deck_cards.pluck(:user_card_id).include?(-deck_card_attribute[:user_card_id].to_i)
+     if deck_card_attribute[:user_card_id].to_i > 0 #&& !self.deck_cards.pluck(:user_card_id).include?(deck_card_attribute[:user_card_id].to_i)
+       if !self.deck_cards.pluck(:user_card_id).include?(deck_card_attribute[:user_card_id].to_i)
+         self.deck_cards.build(deck_card_attribute)
+       else
+         card = self.deck_cards.find_by(user_card_id: deck_card_attribute[:user_card_id])
+         card.update(deck_card_attribute)
+       end
+     elsif deck_card_attribute[:user_card_id].to_i < 0 #&& self.deck_cards.pluck(:user_card_id).include?(-deck_card_attribute[:user_card_id].to_i)
        deck_card = self.deck_cards.where(user_card_id: -deck_card_attribute[:user_card_id].to_i).first
        deck_card.destroy if deck_card
      end
