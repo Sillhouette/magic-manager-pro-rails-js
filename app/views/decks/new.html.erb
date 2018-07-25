@@ -1,41 +1,6 @@
 <fieldset>
   <legend><h2>Create a New Deck: </h2></legend>
 
-  <%= form_for @deck do |deck_builder| %>
-    <%= deck_builder.label :name, "Deck Name:" %>
-    <%= deck_builder.text_field :name %>
-
-    <br/><br/>
-
-    <%= deck_builder.label :format, "Format:" %>
-    <%= deck_builder.select :format, options_for_select(Deck.formats)%>
-
-    <br/><br/>
-
-    <%= deck_builder.fields_for :deck_cards do |deck_card_builder| %>
-
-      <div>
-
-        <% card_id = deck_card_builder.object.user_card.id %>
-        <%= deck_card_builder.check_box :user_card_id, {checked: false}, card_id, -1  %>
-        <%= deck_card_builder.label :user_card_id, "#{deck_card_builder.object.user_card.magic_card_name}:" %>
-        <br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= deck_card_builder.label :main_board_quantity, "Main board quantity:" %>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= deck_card_builder.number_field :main_board_quantity %>
-        <br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= deck_card_builder.label :side_board_quantity, "Side board quantity:" %>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= deck_card_builder.number_field :side_board_quantity %>
-        <br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= deck_card_builder.label :main_board_option, "Main board option:" %>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= deck_card_builder.check_box :main_board_option %>
-        <br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= deck_card_builder.label :side_board_option, "Side board option:" %>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= deck_card_builder.check_box :side_board_option %>
-        <br/><br/>
-      </div>
-    <% end %>
-
-    <%= deck_builder.submit %>
-  <% end %>
+  <%= render partial: "deck_form"%>
 
 </fieldset>

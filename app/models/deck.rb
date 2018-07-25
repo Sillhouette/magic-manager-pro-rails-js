@@ -20,11 +20,23 @@ class Deck < ApplicationRecord
 
   def deck_cards_attributes=(deck_card_attributes)
     deck_card_attributes.values.each do |deck_card_attribute|
-      if deck_card_attribute[:user_card_id] != "-1"
+      if deck_card_attribute[:persist] != nil && !self.deck_cards.pluck(:user_card_id).include?(deck_card_attribute[:user_card_id].to_i)
         self.deck_cards.build(deck_card_attribute)
+      else
+        card = DeckCard.find_by(user_card_id: deck_card_attribute[:user_card_id].to_i)
+        if card
+          card.delete
+        end
       end
     end
   end
+  # def deck_cards_attributes=(deck_card_attributes)
+  #   deck_card_attributes.values.each do |deck_card_attribute|
+  #     if deck_card_attribute[:user_card_id] != "-1"
+  #       self.deck_cards.find_or_initialize_by(deck_card_attribute)
+  #     end
+  #   end
+  # end
 
   # I dont think i need these options in a database, I can just check names against ban/restricted lists
   # t.boolean :standard

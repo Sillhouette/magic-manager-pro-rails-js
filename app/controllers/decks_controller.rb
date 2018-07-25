@@ -24,8 +24,21 @@ class DecksController < ApplicationController
     end
   end
 
+  def edit
+    @deck = Deck.find_by(id: params[:id])
+    current_user.user_cards.each do |card|
+      @deck.deck_cards.build(user_card: card)
+    end
+  end
+
   def update
-    raise params.inspect
+    @deck = Deck.find_by(id: params[:id])
+    if @deck.update(deck_params)
+      redirect_to decks_path
+    else
+      flash[:error] = "The update failed, please try again."
+      render :edit
+    end
   end
 
   def destroy
@@ -35,6 +48,6 @@ class DecksController < ApplicationController
   end
 
   def deck_params
-    params.require(:deck).permit(:name, :format, deck_cards_attributes: [:user_card_id, :main_board_quantity, :side_board_quantity, :main_board_option, :side_board_option])
+    params.require(:deck).permit(:name, :format, deck_cards_attributes: [:persist, :user_card_id, :main_board_quantity, :side_board_quantity, :main_board_option, :side_board_option])
   end
 end
