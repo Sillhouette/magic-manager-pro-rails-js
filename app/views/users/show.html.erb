@@ -1,14 +1,8 @@
 <fieldset>
   <legend><h2><%=@user.name.titlecase%>: </h2></legend>
 
-  <%=link_to button_tag("Edit Profile"), edit_user_path(@user) %>
-
-  <br/><br/>
-
-  <fieldset>
     <h4><%=link_to button_tag("View My Decks"), decks_path %></h4>
 
     <h4><%=link_to button_tag("View My Cards"), user_user_cards_path(@user) %></h4>
-  </fieldset>
 
 </fieldset>

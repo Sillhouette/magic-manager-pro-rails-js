@@ -1,0 +1,17 @@
+<%= render partial: "user_errors_form"%>
+
+<fieldset>
+  <legend><h1>Edit Account:</h1></legend>
+
+  <%= form_for @user do |f| %>
+    <%= f.label :name, "Name:" %> </br>
+    <%= f.text_field :name, placeholder: "Required", :disabled => true %></br>
+
+    <%= f.label :dci_number, "DCI Number:"%> </br>
+    <%= f.number_field :dci_number, placeholder: "Optional"%> </br>
+
+    </br>
+
+    <%= f.submit %>
+  <% end %>
+</fieldset>

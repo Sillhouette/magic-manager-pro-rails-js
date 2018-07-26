@@ -1,13 +1,19 @@
-<%= form_for @user, url: login_path, method: :post do |f| %>
+<fieldset>
+  <legend><h1>Log In:</h1></legend>
+    <%= form_for @user, url: login_path, method: :post do |f| %>
 
-  <%= f.label :id, "Your Name:" %></br>
-  <%= f.text_field :name %> </br>
+      <%= f.label :id, "Your Name:" %></br>
+      <%= f.text_field :name %> </br>
 
-  <%= f.label :password %></br>
-  <%= f.password_field :password, id: "password" %></br>
+      <%= f.label :password %></br>
+      <%= f.password_field :password, id: "password" %></br>
 
-  </br>
+      </br>
 
-  <%= f.submit "Sign In" %>
-  , <%= link_to('Log in with Facebook!', '/auth/facebook') %>, Or <%= link_to(controller: 'users', action: 'new') { 'Sign Up' } %>
-<% end %>
+      <%= f.submit "Sign In" %>
+      <br/><br/>
+      <%= link_to('Log in with Facebook', '/auth/facebook') %>
+      <br/>
+      <%= link_to(controller: 'users', action: 'new') { 'Sign Up' } %>
+    <% end %>
+</fieldset>
