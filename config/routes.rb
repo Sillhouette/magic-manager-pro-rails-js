@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
-  resources :users
-  resources :deck_cards
-  resources :magic_cards
+  resources :users, only: [:new, :show, :edit] do
+    resources :user_cards, only: [:new, :index]
+  end
+  #resources :deck_cards, only: [:new, :index]
+  resources :magic_cards, only: [:show]
   resources :decks
-  resources :user_cards
+  resources :user_cards, only: [:new, :index, :edit, :create, :destroy, :update]
 
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'

@@ -1,7 +1,7 @@
 <fieldset>
   <legend><h2><%=current_user.name.titlecase%>'s Cards: </h2></legend>
 
-    <%=link_to button_tag("Add New Card"), new_user_card_path %>
+    <%=link_to button_tag("Add New Card"), new_user_user_card_path(current_user.id) %>
 
     <br/> <br/>
 

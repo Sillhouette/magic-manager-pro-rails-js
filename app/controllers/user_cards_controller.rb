@@ -15,7 +15,7 @@ class UserCardsController < ApplicationController
       @card = current_user.user_cards.build(user_card_params)
       if @card.valid?
         @card.save
-        redirect_to user_cards_path
+        redirect_to user_user_cards_path(@card.user_id)
       else
         render :new
       end
