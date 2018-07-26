@@ -8,6 +8,8 @@ class Deck < ApplicationRecord
   has_many :magic_cards, through: :user_cards
   accepts_nested_attributes_for :deck_cards
 
+  validates :name, presence: true
+
   FORMATS = [ "Standard", "Modern", "Legacy", "Vintage", "Sealed Deck", "Booster Draft", "Rochester Draft",
               "Two-Headed Giant", "Pauper", "Peasant", "Frontier", "Rainbow Stairwell", "Singleton", "Tribal Wars",
               "Cube Draft", "Back Draft", "Reject Rare Draft", "Type 4", "Free-For-All", "Star", "Assassin", "Emperor",

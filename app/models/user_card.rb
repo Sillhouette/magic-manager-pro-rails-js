@@ -4,6 +4,9 @@ class UserCard < ApplicationRecord
   has_many :deck_cards, dependent: :destroy
   has_many :decks, through: :deck_cards
 
+  validates :magic_card_name, presence: true
+  validates :quantity, presence: true
+
   def self.find_by_full_name(name)
     full_name = name.split(" - ")
     magic_card = MagicCard.find_by(name: full_name[0], setname: full_name[1])

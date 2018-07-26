@@ -16,10 +16,13 @@ class DecksController < ApplicationController
 
   def create
     @deck = current_user.decks.create(deck_params)
-    if @deck.save
+    if @deck.valid?
+      @deck.save
       redirect_to decks_path
     else
-      flash[:error] = "You tried to add an invalid card, please try again."
+      current_user.user_cards.each do |card|
+        @deck.deck_cards.build(user_card: card)
+      end
       render :new
     end
   end
@@ -37,7 +40,7 @@ class DecksController < ApplicationController
     if @deck.update(deck_params)
       redirect_to decks_path
     else
-      flash[:error] = "The update failed, please try again."
+      #flash[:error] = "The update failed, please try again."
       render :edit
     end
   end

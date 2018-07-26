@@ -1,5 +1,5 @@
 <%= form_for @card do |f| %>
-  <%= f.label :magic_card_name, "Card Name" %>:
+  <%= f.label :magic_card_name, "Card Name:" %>
   <%= f.text_field :magic_card_name, list: 'card-name', readonly: editing ? true : nil %>
   <datalist id="card-name">
     <% MagicCard.all.each do |card| %>
@@ -9,11 +9,11 @@
 
   </br></br>
 
-  <% if MagicCard.find_by(id: @card.magic_card_id).image_url %>
+  <% if MagicCard.find_by(id: @card.magic_card_id) != nil && MagicCard.find_by(id: @card.magic_card_id).image_url %>
     <img src="<%=MagicCard.find(@card.magic_card_id).image_url%>", style="float:right">
   <% end %>
 
-  <%= f.label :quantity, "Quantity" %>:
+  <%= f.label :quantity, "Quantity:" %>
   <%= f.number_field :quantity%>
 
   </br></br>

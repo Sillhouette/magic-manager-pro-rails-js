@@ -1,3 +1,5 @@
+<%= render partial: "user_errors_form"%>
+
 <%= form_for @user do |f| %>
   <%= f.label :name, "Name:" %> </br>
   <%= f.text_field :name, placeholder: "Required" %></br>

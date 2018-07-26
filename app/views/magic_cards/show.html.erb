@@ -34,7 +34,7 @@
     <p><%="Timeshifted: #{@card.timeshifted.titlecase}" if @card.timeshifted%></p>
     <p><%="Hand: #{@card.hand.titlecase}" if @card.hand%></p>
     <p><%="Life: #{@card.life.titlecase}" if @card.life%></p>
-    <p><%="Reserved: #{@card.reserved.titlecase}" if @card.reserved%></p>
+    <p><%="Reserved: #{@card.reserved.to_s.titlecase}" if @card.reserved%></p>
     <p><%="Release Date: #{@card.release_date.titlecase}" if @card.release_date%></p>
     <p><%="Starter: #{@card.starter.titlecase}" if @card.starter%></p>
     <p><%="Rulings: #{@card.rulings}" if @card.rulings%></p>
