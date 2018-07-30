@@ -10,6 +10,8 @@
 
     <% if MagicCard.find_by(id: card.magic_card_id).image_url %>
       <img src="<%=MagicCard.find(card.magic_card_id).image_url%>", style="float:right">
+    <% else %>
+      <%= image_tag("placeholder.jpg", style: "float:right" )%>
     <% end %>
 
     <p>

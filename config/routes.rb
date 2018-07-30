@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :users do
+  resources :users, except: [:edit] do
     resources :user_cards, only: [:new, :index]
   end
   #resources :deck_cards, only: [:new, :index]

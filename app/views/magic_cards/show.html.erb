@@ -9,7 +9,9 @@
 
     <% if @card.image_url %>
       <img src="<%=@card.image_url%>", style="float:right">
-    <% end%>
+    <% else %>
+      <%= image_tag("placeholder.jpg", style: "float:right" )%>
+    <% end %>
 
     <p><%="Supertypes: #{@card.supertypes.titlecase}" if @card.supertypes%></p>
     <p><%="Types: #{@card.types.titlecase}" if @card.types%></p>

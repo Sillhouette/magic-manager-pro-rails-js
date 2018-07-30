@@ -18,6 +18,8 @@
           <legend><h3><%=MagicCard.find_by(id: UserCard.find(card.user_card_id).magic_card_id).name %></h3></legend>
           <% if MagicCard.find_by(id: UserCard.find(card.user_card_id).magic_card_id).image_url %>
             <img src="<%=MagicCard.find_by(id: UserCard.find_by(id: card.user_card_id).magic_card_id).image_url%>", style="float:right">
+          <% else %>
+            <%= image_tag("placeholder.jpg", style: "float:right" )%>
           <% end %>
           <%= "Main Board: #{card.main_board_quantity ? card.main_board_quantity : 0}" %><br/><br/><br/><br/>
           <%= "Side Board: #{card.side_board_quantity ? card.side_board_quantity : 0}" %><br/><br/><br/><br/>
