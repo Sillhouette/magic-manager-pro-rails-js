@@ -7,6 +7,10 @@ class UserCard < ApplicationRecord
   validates :magic_card_name, presence: true
   validates :quantity, presence: true
 
+  def legal?(format_name)
+    self.magic_card.legalities.include?("#{format_name}: Legal") || self.magic_card.legalities.include?("#{format_name}: Restricted") && !self.magic_card.legalities.include?("#{format_name}: Banned")
+  end
+
   def self.find_by_full_name(name)
     full_name = name.split(" - ")
     magic_card = MagicCard.find_by(name: full_name[0], setname: full_name[1])
