@@ -1,7 +1,14 @@
 <fieldset>
   <legend><h2><%=current_user.name.titlecase%>'s Decks: </h2></legend>
 
-    <%=link_to button_tag("Add New Deck"), new_deck_path %>
+    <%= form_tag(new_deck_path, method: "get") do %>
+
+      <%=submit_tag("Add New Deck") %>
+
+      <%= label_tag(:format, "Format:") %>
+      <%= select_tag(:format, options_for_select(Deck.formats), :prompt => "Select a Format")%>
+
+    <% end %>
 
     <br/> <br/>
 

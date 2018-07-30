@@ -10,11 +10,11 @@ class Deck < ApplicationRecord
 
   validates :name, presence: true
 
-  FORMATS = [ "Standard", "Modern", "Legacy", "Vintage", "Sealed Deck", "Booster Draft", "Rochester Draft",
-              "Two-Headed Giant", "Pauper", "Peasant", "Frontier", "Rainbow Stairwell", "Singleton", "Tribal Wars",
-              "Cube Draft", "Back Draft", "Reject Rare Draft", "Type 4", "Free-For-All", "Star", "Assassin", "Emperor",
-              "Vanguard", "Planar Magic", "Archenemy", "Commander", "Brawl", "Mental Magic", "Mini-Magic", "Horde Magic",
-              "QL Magic", "Fat Stack/Tower of Power", "Pack War", "Penny Dreadful", "Commander Adventures", "Old School" ]
+  FORMATS = [ "Amonkhet Block", "Battle for Zendikar Block", "Classic", "Commander", "Extended", "Freeform", "Ice Age Block", "Innistrad Block",
+     "Invasion Block", "Kaladesh Block", "Kamigawa Block", "Khans of Tarkir Block", "Legacy", "Lorwyn-Shadowmoor Block", "Masques Block",
+     "Mirage Block", "Mirrodin Block", "Modern", "Odyssey Block", "Onslaught Block", "Prismatic", "Ravnica Block", "Return to Ravnica Block",
+     "Scars of Mirrodin Block", "Shadows over Innistrad Block", "Shards of Alara Block", "Singleton 100", "Standard", "Tempest Block", "Theros Block",
+     "Time Spiral Block", "Tribal Wars Legacy", "Un-Sets", "Urza Block", "Vintage", "Zendikar Block" ]
 
   def self.formats
     FORMATS

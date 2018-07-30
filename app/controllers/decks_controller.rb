@@ -1,8 +1,13 @@
 class DecksController < ApplicationController
   def new
-    @deck = Deck.new
-    current_user.user_cards.each do |card|
-      @deck.deck_cards.build(user_card: card)
+    if params[:format] != ""
+      @deck = Deck.new
+      current_user.user_cards.each do |card|
+        @deck.deck_cards.build(user_card: card)
+      end
+    else
+      flash[:error] = "Please select a format before creating a new deck."
+      render :index
     end
   end
 

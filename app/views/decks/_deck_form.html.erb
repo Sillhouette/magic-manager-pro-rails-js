@@ -4,11 +4,6 @@
 
   <br/><br/>
 
-  <%= deck_builder.label :format, "Format:" %>
-  <%= deck_builder.select :format, options_for_select(Deck.formats)%>
-
-  <br/><br/>
-
   <%= deck_builder.fields_for :deck_cards do |deck_card_builder| %>
 
     <div>

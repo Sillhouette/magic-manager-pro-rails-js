@@ -1,7 +1,7 @@
 user1 = User.create(name: "sillhouette", password: "m")
 user2 = User.create(name: "iamcatdad", password: "catz4lyf3")
 
-user1.user_cards.create(magic_card_id: MagicCard.find(1).id, quantity: 5, quality: "mint", value: "$45")
+user2.user_cards.build(magic_card_id: MagicCard.find(1).id, quantity: 5, quality: "mint", value: "$45")
 user1.user_cards.create(magic_card_id: MagicCard.find(2).id, quantity: 5, quality: "mint", value: "$45")
 user1.user_cards.create(magic_card_id: MagicCard.find(3).id, quantity: 5, quality: "mint", value: "$45")
 user1.user_cards.create(magic_card_id: MagicCard.find(4).id, quantity: 5, quality: "mint", value: "$45")
