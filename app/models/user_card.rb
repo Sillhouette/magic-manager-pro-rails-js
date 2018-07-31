@@ -19,6 +19,12 @@ class UserCard < ApplicationRecord
     end
   end
 
+  def self.filter_by_type(user, type)
+    type = type.titlecase if type != nil
+    user.user_cards.joins(:magic_card).where("magic_cards.types LIKE ? ", type)
+  end
+
+
   def magic_card_name
     self.magic_card.name + " - " + self.magic_card.setname if magic_card
   end

@@ -3,6 +3,17 @@
 
     <%=link_to button_tag("Add New Card"), new_user_user_card_path(current_user.id) %>
 
+    <br/><br/>
+
+    <%= form_tag(user_user_cards_path(current_user), method: "get") do %>
+
+      <%= label_tag(:card_type, "Filter cards by type:") %>
+      <%= select_tag(:card_type, options_for_select(MagicCard.types, params[:card_type]), :prompt => "All")%>
+
+      <%=submit_tag("Filter") %>
+
+    <% end %>
+
     <br/> <br/>
 
     <%= render partial: "user_cards/index_list", locals: {update_delete_buttons: true} %>

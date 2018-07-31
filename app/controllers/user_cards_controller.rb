@@ -1,6 +1,12 @@
 class UserCardsController < ApplicationController
 
   def index
+    if params[:card_type] != "" && params[:card_type] != nil
+      @cards = UserCard.filter_by_type(current_user, params[:card_type])
+      @type = params[:card_type]
+    else
+      @cards = current_user.user_cards
+    end
   end
 
   def new

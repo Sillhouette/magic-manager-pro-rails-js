@@ -6,6 +6,11 @@ class MagicCard < ApplicationRecord
   has_many :user_cards, dependent: :destroy
   has_many :users, through: :user_cards
 
+  TYPES = ["Instant", "Sorcery", "Artifact", "Creature", "Enchantment", "Land", "Planeswalker"]
+
+  def self.types
+    TYPES
+  end
   def self.parse_json
     page_number = 1
     done = false

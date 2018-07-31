@@ -16,7 +16,7 @@ Then, install the gems required by the application:
 
 Next, execute the database migrations/schema setup:
 
-	bundle exec rake db:setup
+	bundle exec rake db:migrate
 
 After, start your rails console by typing
 

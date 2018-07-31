@@ -1,4 +1,4 @@
-<%current_user.user_cards.each do |card| %>
+<% @cards.each do |card| %>
   <fieldset>
     <legend><h4><%= card.magic_card_name%>
       <% if update_delete_buttons %>
