@@ -11,6 +11,7 @@ class MagicCard < ApplicationRecord
   def self.types
     TYPES
   end
+  
   def self.parse_json
     page_number = 1
     done = false
@@ -61,10 +62,10 @@ class MagicCard < ApplicationRecord
           card_info[:original_type] = card["originalType"] if card["originalType"] #string
           card_info[:legalities] = card["legalities"].collect { |hash| "#{hash["format"]}: #{hash["legality"]} "}.join("\n") if card["legalities"]#array of hashes
           card_info[:source] = card["source"] if card["source"] #string
-          puts page_number
           self.find_or_create_by(card_info)
         end
       end
+      print "\t#{page_number} pages complete. (370 total pages as of 7/30/18)\r"
       page_number = page_number + 1
     end
   end
