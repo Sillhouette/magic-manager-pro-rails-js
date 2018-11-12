@@ -1,11 +1,11 @@
 class DecksController < ApplicationController
   def new
     if params[:format] != ""
-      @deck = Deck.new
+      @deck = Deck.new(format: params[:format])
       current_user.user_cards.each do |card|
-        if card.legal?(params[:format])
+        #if card.legal?(params[:format])
           @deck.deck_cards.build(user_card: card)
-        end
+        #end
       end
     else
       flash[:error] = "Please select a format before creating a new deck."

@@ -2,6 +2,8 @@
   <%= deck_builder.label :name, "Deck Name:" %>
   <%= deck_builder.text_field :name %>
 
+  <%= deck_builder.hidden_field :format %>
+
   <br/><br/>
 
   <%= deck_builder.fields_for :deck_cards do |deck_card_builder| %>
