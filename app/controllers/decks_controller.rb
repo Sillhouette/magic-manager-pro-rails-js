@@ -15,6 +15,10 @@ class DecksController < ApplicationController
 
   def show
     @deck = Deck.find(params[:id])
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @deck}
+    end
   end
 
   def index
