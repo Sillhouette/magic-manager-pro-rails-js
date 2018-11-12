@@ -1,4 +1,5 @@
 class Deck < ActiveModel::Serializer
+  attributes :name, :format, :user_id
 
   belongs_to :user
   has_many :deck_cards, dependent: :destroy
