@@ -1,4 +1,4 @@
-<%= form_for @deck do |deck_builder| %>
+<%= form_for [@user, @deck] do |deck_builder| %>
   <%= deck_builder.label :name, "Deck Name:" %>
   <%= deck_builder.text_field :name %>
 

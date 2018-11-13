@@ -1,7 +1,7 @@
 <fieldset>
-  <legend><h2><%=current_user.name.titlecase%>'s Decks: </h2></legend>
+  <legend><h2><%=@user.name.titlecase%>'s Decks: </h2></legend>
 
-    <%= form_tag(new_deck_path, method: "get") do %>
+    <%= form_tag(new_user_deck_path, method: "get") do %>
 
       <%=submit_tag("Add New Deck") %>
 
@@ -12,12 +12,12 @@
 
     <br/> <br/>
 
-  <%current_user.decks.each do |deck| %>
+  <%@user.decks.each do |deck| %>
     <fieldset>
       <legend><h4><%= deck.name%>
-        <%=button_to "View Details", deck_path(deck), method: "get", form: { style: "display:inline-block"} %>
-        <%=button_to "Edit", edit_deck_path(deck), method: "get", form: { style: "display:inline-block"} %>
-        <%=button_to "Delete", deck, :method => :delete, form: { style: "display:inline-block"} %>
+        <%=button_to "View Details", user_deck_path(@user, deck), method: "get", form: { style: "display:inline-block"} %>
+        <%=button_to "Edit", edit_user_deck_path(@user, deck), method: "get", form: { style: "display:inline-block"} %>
+        <%=button_to "Delete", user_deck_path(@user, deck), :method => :delete, form: { style: "display:inline-block"} %>
       </h4></legend>
 
       <p>

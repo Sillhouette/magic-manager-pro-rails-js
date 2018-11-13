@@ -1,7 +1,7 @@
 <fieldset>
   <legend><h2><%=@deck.name.titlecase%>: </h2></legend>
 
-  <%= form_for @deck do |f| %>
+  <%= form_for [@user, @deck] do |f| %>
 
     <h4><%= f.label :format, "Format:" %>
     </br>

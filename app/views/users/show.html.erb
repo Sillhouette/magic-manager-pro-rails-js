@@ -1,7 +1,31 @@
 <fieldset>
   <legend><h2><%=@user.name.titlecase%>: </h2></legend>
 
-    <h4><%=link_to button_tag("View My Decks"), decks_path %></h4>
+    <h4><%=link_to button_tag("View My Decks"), user_decks_path(@user) %></h4>
+
+
+
+      <div id="user_decks"></div>
+      <button class="js-view-decks" data-id="<%= @user.id %>">View My Decks</button>
+
+
+      <script type="text/javascript" charset="utf-8">
+        $(function() {
+          $(".js-view-decks").on("click", function() {
+            var id = $(this).data("id");
+            $.get("/decks.json", function(data) {
+              // $(".productName").text(data["name"]);
+              debugger
+                //var inventoryText = "<strong>Available</strong>";
+                //if(data["inventory"] === 0){
+                //  inventoryText = "<strong>Sold Out</strong>";
+                //}
+                //var descriptionText = "<p>" + data["description"] + "</p><p>" + inventoryText + "</p>";
+                //$("#product-" + id).html(descriptionText);
+            });
+          });
+        });
+      </script>
 
     <h4><%=link_to button_tag("View My Cards"), user_user_cards_path(@user) %></h4>
 

@@ -1,8 +1,9 @@
 class DecksController < ApplicationController
   def new
+    @user = current_user
     if params[:format] != ""
       @deck = Deck.new(format: params[:format])
-      current_user.user_cards.each do |card|
+      @user.user_cards.each do |card|
         #if card.legal?(params[:format])
           @deck.deck_cards.build(user_card: card)
         #end
@@ -14,6 +15,7 @@ class DecksController < ApplicationController
   end
 
   def show
+    @user = current_user
     @deck = Deck.find(params[:id])
     respond_to do |format|
       format.html { render :show }
@@ -29,7 +31,7 @@ class DecksController < ApplicationController
     @deck = current_user.decks.create(deck_params)
     if @deck.valid?
       @deck.save
-      redirect_to decks_path
+      redirect_to user_decks_path
     else
       current_user.user_cards.each do |card|
         @deck.deck_cards.build(user_card: card)
@@ -49,7 +51,7 @@ class DecksController < ApplicationController
   def update
     @deck = Deck.find(params[:id])
     if @deck.update(deck_params)
-      redirect_to decks_path
+      redirect_to user_decks_path
     else
       #flash[:error] = "The update failed, please try again."
       render :edit
@@ -57,9 +59,11 @@ class DecksController < ApplicationController
   end
 
   def destroy
-    @deck = Deck.find_by(id: params[:id])
+    @deck = Deck.find(params[:id])
+
+    #binding.pry
     @deck.destroy
-    redirect_to decks_path
+    redirect_to user_decks_path
   end
 
   def deck_params
