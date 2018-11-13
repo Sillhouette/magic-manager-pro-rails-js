@@ -17,6 +17,7 @@ class UsersController < ApplicationController
   def show
     if logged_in?
       @user = User.find_by(id: params[:id])
+      @card = UserCard.new
       respond_to do |format|
         format.html { render :show }
         format.json { render json: @user}

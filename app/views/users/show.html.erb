@@ -1,32 +1,152 @@
 <fieldset>
   <legend><h2><%=@user.name.titlecase%>: </h2></legend>
 
-    <h4><%=link_to button_tag("View My Decks"), user_decks_path(@user) %></h4>
+    <button class="js-view-decks" data-id="<%= @user.id %>">View Decks</button>
 
-
-
-      <div id="user_decks"></div>
-      <button class="js-view-decks" data-id="<%= @user.id %>">View My Decks</button>
-
+    <div id="user_decks"></div>
 
       <script type="text/javascript" charset="utf-8">
         $(function() {
           $(".js-view-decks").on("click", function() {
+            var x = document.getElementById("user_decks");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            }
             var id = $(this).data("id");
-            $.get("/decks.json", function(data) {
-              // $(".productName").text(data["name"]);
-              debugger
-                //var inventoryText = "<strong>Available</strong>";
-                //if(data["inventory"] === 0){
-                //  inventoryText = "<strong>Sold Out</strong>";
-                //}
-                //var descriptionText = "<p>" + data["description"] + "</p><p>" + inventoryText + "</p>";
-                //$("#product-" + id).html(descriptionText);
+            $.get("/users/" + id + "/decks.json", function(data) {
+              var complete = `
+
+              <fieldset>
+
+              <legend><h3> <%=@user.name.titlecase%>'s Decks:</h3></legend>
+
+              <%= form_tag("/users/${id}/decks/new", method: "get") do %>
+
+                <%=submit_tag("Add New Deck") %>
+
+                <%= label_tag(:format, "Format:") %>
+                <%= select_tag(:format, options_for_select(Deck.formats), :prompt => "Select a Format")%>
+
+                <button type="button" onclick="hideDecks()" style="float:right;display:inline">Hide Decks</button>
+              <% end %>
+              `
+
+              data.forEach(function(deck) {
+                const markup = `
+                <div id='deck_${deck.id}'>
+                  <fieldset>
+                    <legend><h4> ${deck.name}
+
+                    <%= button_to "View Details", "/users/${deck.user_id}/decks/${deck.id}/", method: "get", form: { style: "display:inline-block"} %>
+
+                    <%=button_to "Edit", "/users/${deck.user_id}/decks/${deck.id}/", method: "get", form: { style: "display:inline-block"} %>
+
+                    <form method='post' action='/users/${deck.user_id}/decks/${deck.id}' data-remote='true' form={ style="display:inline-block"}>
+                       <input name='_method' value='delete' type='hidden' />
+                       <input value='Delete' type='submit' />
+                     </form>
+                    </h4></legend>
+
+                    <p>
+                      <%= "Format: ${deck.format}" %> <br/>
+                      <%= "Cards: ${deck.deck_cards.length}" %>
+                    </p>
+                  </fieldset>
+                </div>
+                `
+                complete += markup
+              });
+              complete += `</fieldset>`
+              $("#user_decks").html(complete)
             });
           });
         });
       </script>
 
-    <h4><%=link_to button_tag("View My Cards"), user_user_cards_path(@user) %></h4>
+      <script>
+        function hideDecks() {
+          var x = document.getElementById("user_decks");
+          if (x.style.display === "none") {
+              x.style.display = "block";
+          } else {
+              x.style.display = "none";
+          }
+        }
+      </script>
+
+    <h3> Cards: </h3>
+
+    <button class="js-view-cards" data-id="<%= @user.id %>">View Cards</button>
+
+    <div id="user_cards"></div>
+
+      <script type="text/javascript" charset="utf-8">
+        $(function() {
+          $(".js-view-cards").on("click", function() {
+            var x = document.getElementById("user_cards");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            }
+            var id = $(this).data("id");
+            $.get("/users/" + id + "/user_cards.json", function(data) {
+              var complete = `
+
+              <fieldset>
+
+              <legend><h3> <%=@user.name.titlecase%>'s Cards:</h3></legend>
+
+              <button type="button" onclick="hideCards()" style="float:right;display:inline">Hide Cards</button>
+
+              <fieldset>
+
+              <legend><h4>Add a new card:</h4></legend>
+
+              <%= render partial: "/user_cards/user_card_form", locals: {editing: false}%>
+
+              </fieldset>
+
+              `
+
+              data.forEach(function(card) {
+                const markup = `
+                <div id='card_${card.id}'>
+                  <fieldset>
+                    <legend><h4> ${card.magic_card_name}
+
+                    <%= button_to "View Details", "/magic_cards/${card.magic_card_id}/", method: "get", form: { style: "display:inline-block"} %>
+
+                    <%=button_to "Edit", "/user_cards/${card.id}/edit", method: "get", form: { style: "display:inline-block"} %>
+
+                    <form method='post' action='/user_cards/${card.id}' data-remote='true' form={ style="display:inline-block"}>
+                       <input name='_method' value='delete' type='hidden' />
+                       <input value='Delete' type='submit' />
+                     </form>
+                    </h4></legend>
+
+                    <p>
+
+                    </p>
+                  </fieldset>
+                </div>
+                `
+                complete += markup
+              });
+              complete += `</fieldset>`
+              $("#user_decks").html(complete)
+            });
+          });
+        });
+      </script>
+
+      <script>
+        function hideDecks() {
+          var x = document.getElementById("user_decks");
+          if (x.style.display === "none") {
+              x.style.display = "block";
+          } else {
+              x.style.display = "none";
+          }
+        }
+      </script>
 
 </fieldset>

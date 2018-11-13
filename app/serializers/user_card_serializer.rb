@@ -1,5 +1,5 @@
 class UserCardSerializer < ActiveModel::Serializer
-  attributes :user_id, :magic_card_id, :quality, :value, :quantity
+  attributes :user_id, :magic_card_id, :quality, :value, :quantity, :id, :magic_card_name
 
   belongs_to :user
   belongs_to :magic_card

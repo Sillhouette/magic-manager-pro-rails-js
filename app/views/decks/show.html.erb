@@ -1,5 +1,8 @@
 <fieldset>
-  <legend><h2><%=@deck.name.titlecase%>: </h2></legend>
+  <legend><h2><%=@deck.name.titlecase%>:
+  <%=button_to "Edit", edit_user_deck_path(@user, @deck), method: "get", form: { style: "display:inline-block"} %>
+  <%=button_to "Delete", user_deck_path(@user, @deck), :method => :delete, form: { style: "display:inline-block;"} %>
+  </h2></legend>
 
   <%= form_for [@user, @deck] do |f| %>
 

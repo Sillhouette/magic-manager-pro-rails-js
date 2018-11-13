@@ -6,6 +6,10 @@ class UserCardsController < ApplicationController
       @type = params[:card_type]
     else
       @cards = current_user.user_cards
+      respond_to do |format|
+        format.html { render :index }
+        format.json { render json: @cards}
+      end
     end
   end
 
