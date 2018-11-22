@@ -55,14 +55,26 @@ class Deck {
       return new DeckCard(card);
     });
   }
-  //Layout the cards in a hidden div then make the view details button show and hide that div
+
+  deckCards(){
+
+      let html = ``
+
+      this.cards.forEach(function(card) {
+        html += card.html()
+      });
+
+      return html;
+  }
+
   html() {
+
     let result = `
        <div id='deck_` + this.id + `'>
         <fieldset>
           <legend><h4> ` + this.name + `
 
-          <button class="js-deck-details" data-user_id="<%= @user.id %>" data-deck_id="` + this.id + `">View Details</button>
+          <button type="button" onclick="toggleDeckDetails(`+ this.id +`)" >Toggle Details</button>
 
           <form method='Update' action='/users/` + this.user_id + `/decks/` + this.id + `/edit' form={ style="display:inline-block"}>
              <input value='Edit' type='submit' />
@@ -80,12 +92,21 @@ class Deck {
             Cards: ` + this.num_cards + `
           </p>
 
-          <div id='deck_` + this.id + `_cards'></div>
+          <div id='deck_` + this.id + `_cards' style="display:none">` + this.deckCards() + `</div>
         </fieldset>
       </div>
     `
     return result
   }
+}
+
+function toggleDeckDetails(deck_id){
+  var x = document.getElementById("deck_" + deck_id + "_cards");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
 }
 
 class DeckCard {
@@ -103,9 +124,9 @@ class DeckCard {
   }
 
   html() {
-    let image = 'image_tag(this.image_url, style: "float:right"'
+    let image = `<img src="` + this.image_url + `" style="float:right"`
     if (!this.image_url){
-      'image_tag("placeholder.jpg", style: "float:right" )'
+      image = `<img src="placeholder.jpg" style="float:right"`
     }
 
     let main_board_quantity = this.main_board_quantity ? this.main_board_quantity : "0";
@@ -119,7 +140,7 @@ class DeckCard {
        <fieldset>
          <legend><h3> ` + this.name + `</h3></legend>
 
-         ` + image + `
+         ` + image + `</br>
 
          Main Board: ` + main_board_quantity + `<br/><br/><br/><br/>
          Side Board: ` + side_board_quantity + `<br/><br/><br/><br/>
