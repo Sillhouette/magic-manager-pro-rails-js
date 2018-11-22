@@ -1,14 +1,7 @@
 <fieldset>
   <legend><h2><%=@user.name.titlecase%>'s Decks: </h2></legend>
 
-    <%= form_tag(new_user_deck_path, method: "get") do %>
-
-      <%=submit_tag("Add New Deck") %>
-
-      <%= label_tag(:format, "Format:") %>
-      <%= select_tag(:format, options_for_select(Deck.formats), :prompt => "Select a Format")%>
-
-    <% end %>
+    <%= render partial: "new_deck_submit_form"  %>
 
     <br/> <br/>
 

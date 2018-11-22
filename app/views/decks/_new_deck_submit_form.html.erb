@@ -1,0 +1,8 @@
+<%= form_tag(new_user_deck_path, method: "get") do %>
+
+  <%=submit_tag("Add New Deck") %>
+
+  <%= label_tag(:format, "Format:") %>
+  <%= select_tag(:format, options_for_select(Deck.formats), :prompt => "Select a Format")%>
+
+<% end %>
