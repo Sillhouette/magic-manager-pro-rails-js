@@ -1,14 +1,22 @@
-<fieldset>
-  <legend><h2><%=@user.name.titlecase%>: </h2></legend>
+<span>
+  <fieldset style="display:block" >
+    <legend><h2><%=@user.name%>: </h2></legend>
 
-    <button class="js-view-decks" data-id="<%= @user.id %>">View Decks</button>
+      <h3>Decks: <%= @user.decks.length %></h3>
 
-    <div id="user_decks"></div>
+      <div id="deck-toggle-buttons">
+        <button id="toggle_decks" onclick="getDecks()" data-id="<%= @user.id %>">View Decks</button>
+      </div>
 
-    <h3> Cards: </h3>
+      <div id="user_decks"></div>
 
-    <button class="js-view-cards" data-id="<%= @user.id %>">View Cards</button>
+      <h3> Cards: <%= @user.user_cards.length %></h3>
 
-    <div id="user_cards"></div>
+      <div id="card-toggle-buttons">
+        <button id="toggle_cards" onclick=getCards() data-id="<%= @user.id %>">View Cards</button>
+      </div>
 
-</fieldset>
+      <div id="user_cards"></div>
+
+  </fieldset>
+</span>

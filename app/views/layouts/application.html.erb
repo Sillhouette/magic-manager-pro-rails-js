@@ -12,11 +12,12 @@
 
   <body>
     <% if logged_in? %>
-      <div style="float:right;display:inline">
+      <div >
         <%= render partial: "./logout_button"%>
-        <%= link_to button_tag("Decks Index"), user_decks_path(current_user), :style => "float: right;" %>
-        <%= link_to button_tag("Cards Index"), user_user_cards_path(current_user), :style => "float: right;" %>
-        <%= link_to button_tag("Profile Page"), user_path(current_user), :style => "float: right;" %>
+        <%= link_to button_tag("hidden"), "", :style => "visibility:hidden;" %>
+        <%= link_to button_tag("Decks Index"), user_decks_path(current_user), :style => "float:right; display:inline-block;" %>
+        <%= link_to button_tag("Cards Index"), user_user_cards_path(current_user), :style => "float: right; display:inline-block;" %>
+        <%= link_to button_tag("Profile Page"), user_path(current_user), :style => "float: right; display:inline-block;" %>
       </div>
     <% end %>
 

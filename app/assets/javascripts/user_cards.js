@@ -1,35 +1,29 @@
-$(function() {
-  $(".js-view-cards").on("click", function() {
-    var x = document.getElementById("user_cards");
-    if (x.style.display === "none") {
-        x.style.display = "block";
-    }
+function getCards() {
+  var cardToggleButton = document.getElementById("toggle_cards");
+  if ($("#user_cards").html() === "") {
+
+    cardToggleButton.innerText = "Hide Cards";
     var id = $(this).data("id");
 
     $.get("/users/" + id + "/user_cards.json", function(data) {
 
-      var complete = `
-      <fieldset>
-
-      <legend><h3> ${data[0].user.name}'s Cards:</h3></legend>
-      <button type="button" onclick="hideCards()" >Hide Cards</button>
-      `
+      var complete = ``
+      
       data.forEach(function(card) {
         const markup = new Card(card).html()
         complete += markup
       });
-      complete += `</fieldset>`
       $("#user_cards").html(complete)
     });
-  });
-});
-
-function hideCards() {
-  var x = document.getElementById("user_cards");
-  if (x.style.display === "none") {
-      x.style.display = "block";
   } else {
-      x.style.display = "none";
+    var card_block = document.getElementById("user_cards");
+    if (card_block.style.display === "none") {
+        cardToggleButton.innerText = "Hide Cards"
+        card_block.style.display = "block";
+    } else {
+      cardToggleButton.innerText = "View Cards"
+      card_block.style.display = "none";
+    }
   }
 }
 

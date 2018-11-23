@@ -1,45 +1,36 @@
+function getDecks(){
+  var deckToggleButton = document.getElementById("toggle_decks");
+  if ($("#user_decks").html() === ""){
 
-$(function() {
-  $(".js-view-decks").on("click", function() {
-    var x = document.getElementById("user_decks");
-    if (x.style.display === "none") {
-        x.style.display = "block";
-    }
+    deckToggleButton.innerText = "Hide Decks";
     var id = $(this).data("id");
 
     $.get("/users/" + id + "/decks.json", function(data) {
 
-      var complete = `
-      <fieldset>
-
-      <legend><h3> ${data[0].user.name}'s Decks:</h3></legend>
-      <button type="button" onclick="hideDecks()" >Hide Decks</button>
-
-      `
+      var complete = ``
       // <%= form_tag("/users/${id}/decks/new", method: "get") do %>
       //
       //   <%=submit_tag("Add New Deck") %>
       //
       //   <%= label_tag(:format, "Format:") %>
-      //   <%= select_tag(:format, options_for_select(Deck.formats), :prompt => "Select a Format")%>
+      //   <%= select_tag(: format, options_for_select(Deck.formats), :prompt => "Select a Format")%>
       // <% end %>
 
       data.forEach(function(deck) {
         const markup = new Deck(deck).html()
         complete += markup
       });
-      complete += `</fieldset>`
       $("#user_decks").html(complete)
     });
-  });
-});
-
-function hideDecks() {
-  var x = document.getElementById("user_decks");
-  if (x.style.display === "none") {
-      x.style.display = "block";
   } else {
-      x.style.display = "none";
+    var deck_block = document.getElementById("user_decks");
+    if (deck_block.style.display === "none") {
+        deckToggleButton.innerText = "Hide Decks"
+        deck_block.style.display = "block";
+    } else {
+      deckToggleButton.innerText = "View Decks"
+      deck_block.style.display = "none";
+    }
   }
 }
 
@@ -74,7 +65,7 @@ class Deck {
         <fieldset>
           <legend><h4> ` + this.name + `
 
-          <button type="button" onclick="toggleDeckDetails(`+ this.id +`)" >Toggle Details</button>
+          <button type="button" id="deck_`+ this.id + `_toggle" onclick="toggleDeckDetails(`+ this.id +`)" >View Details</button>
 
           <form method='Update' action='/users/` + this.user_id + `/decks/` + this.id + `/edit' form={ style="display:inline-block"}>
              <input value='Edit' type='submit' />
@@ -101,11 +92,14 @@ class Deck {
 }
 
 function toggleDeckDetails(deck_id){
-  var x = document.getElementById("deck_" + deck_id + "_cards");
-    if (x.style.display === "none") {
-        x.style.display = "block";
+  var detailsToggleButton = document.getElementById("deck_" + deck_id + "_toggle");
+  var deck_block = document.getElementById("deck_" + deck_id + "_cards");
+    if (deck_block.style.display === "none") {
+        detailsToggleButton.innerText = "Hide Details";
+        deck_block.style.display = "block";
     } else {
-        x.style.display = "none";
+        detailsToggleButton.innerText = "View Details"
+        deck_block.style.display = "none";
     }
 }
 
