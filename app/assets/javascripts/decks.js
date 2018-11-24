@@ -8,13 +8,6 @@ function getDecks(){
     $.get("/users/" + id + "/decks.json", function(data) {
 
       var complete = ``
-      // <%= form_tag("/users/${id}/decks/new", method: "get") do %>
-      //
-      //   <%=submit_tag("Add New Deck") %>
-      //
-      //   <%= label_tag(:format, "Format:") %>
-      //   <%= select_tag(: format, options_for_select(Deck.formats), :prompt => "Select a Format")%>
-      // <% end %>
 
       data.forEach(function(deck) {
         const markup = new Deck(deck).html()

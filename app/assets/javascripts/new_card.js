@@ -1,15 +1,11 @@
-$(function() {
+$(document).on("turbolinks:load", function(){
   let form = document.querySelector('form[id="new_user_card"]');
+  if(!form){
+    return
+  }
+
   form.addEventListener('submit', function(event) {
       event.preventDefault();
-
-      let name = this.user_card_magic_card_name.value;
-      let quantity = this.user_card_quantity.value;
-      let quality = this.user_card_quality.value;
-      let value = this.user_card_value.value;
-      let url = this.action;
-      let authenticity_token = this.authenticity_token.value;
-
 
       $.ajax({
         type: this.method,
@@ -23,4 +19,4 @@ $(function() {
       });
 
   });
-})
+});

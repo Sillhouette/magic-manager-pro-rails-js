@@ -10,9 +10,10 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="<%= controller_name %> <%= action_name %>">
+    <!-- <background="<%= asset_path 'MTG-background.jpg' %>" -->
     <% if logged_in? %>
-      <div >
+      <div>
         <%= render partial: "./logout_button"%>
         <%= link_to button_tag("hidden"), "", :style => "visibility:hidden;" %>
         <%= link_to button_tag("Decks Index"), user_decks_path(current_user), :style => "float:right; display:inline-block;" %>
