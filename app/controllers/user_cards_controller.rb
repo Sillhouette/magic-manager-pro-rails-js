@@ -4,8 +4,10 @@ class UserCardsController < ApplicationController
     if params[:card_type] != "" && params[:card_type] != nil
       @cards = UserCard.filter_by_type(current_user, params[:card_type])
       @type = params[:card_type]
+      @card = UserCard.new
     else
       @cards = current_user.user_cards
+      @card = UserCard.new
       respond_to do |format|
         format.html { render :index }
         format.json { render json: @cards}
@@ -25,7 +27,7 @@ class UserCardsController < ApplicationController
       @card = current_user.user_cards.build(user_card_params)
       if @card.valid?
         @card.save
-        redirect_to user_user_cards_path(@card.user_id)
+          render :show, :layout => false
       else
         render :new
       end

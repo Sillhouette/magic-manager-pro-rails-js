@@ -1,7 +1,15 @@
 <fieldset>
   <legend><h2><%=current_user.name.titlecase%>'s Cards: </h2></legend>
 
-    <%=link_to button_tag("Add New Card"), new_user_user_card_path(current_user.id) %>
+    <%= render partial: "user_card_errors"%>
+
+    <fieldset>
+      <legend><h2>Add a new card to your Account: </h2></legend>
+
+      <%= render partial: "user_card_form", locals: {editing: false}%>
+
+    </fieldset>
+
 
     <br/><br/>
 

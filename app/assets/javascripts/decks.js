@@ -105,7 +105,6 @@ function toggleDeckDetails(deck_id){
 
 class DeckCard {
   constructor(card){
-
     this.id = card.id;
     this.deck_id = card.deck_id;
     this.name = card.user_card.magic_card_name;

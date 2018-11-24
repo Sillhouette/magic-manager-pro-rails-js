@@ -1,39 +1,41 @@
-<% @cards.each do |card| %>
-  <fieldset>
-    <legend><h4><%= card.magic_card_name%>
-      <% if update_delete_buttons %>
-        <%=button_to "View Details", magic_card_path(card.magic_card_id), method: "get", form: { style: "display:inline-block"} %>
-        <%=button_to "Edit", edit_user_card_path(card), method: "get", form: { style: "display:inline-block"} %>
-        <%=button_to "Delete", card, :method => :delete, form: { style: "display:inline-block"} %>
-      <% end %></h4>
-    </legend>
+<div id="cards-container">
+  <% @cards.each do |card| %>
+    <fieldset>
+      <legend><h4><%= card.magic_card_name%>
+        <% if update_delete_buttons %>
+          <%=button_to "View Details", magic_card_path(card.magic_card_id), method: "get", form: { style: "display:inline-block"} %>
+          <%=button_to "Edit", edit_user_card_path(card), method: "get", form: { style: "display:inline-block"} %>
+          <%=button_to "Delete", card, :method => :delete, form: { style: "display:inline-block"} %>
+        <% end %></h4>
+      </legend>
 
-    <% if MagicCard.find_by(id: card.magic_card_id).image_url %>
-      <img src="<%=MagicCard.find(card.magic_card_id).image_url%>", style="float:right">
-    <% else %>
-      <%= image_tag("placeholder.jpg", style: "float:right" )%>
-    <% end %>
-
-    <p>
-      <%= "Quantity: #{card.quantity}" %>
-
-      <%= form_for card do |f| %>
-
-        <%= f.label :value, "Value(s):" %>
-        </br>
-        <%= f.text_area :value, :disabled => true %>
-
-        </br></br>
-
-        <%= f.label :quality, "Quality:" %>
-        </br>
-        <%= f.text_area :quality, :disabled => true %>
-
+      <% if MagicCard.find_by(id: card.magic_card_id).image_url %>
+        <img src="<%=MagicCard.find(card.magic_card_id).image_url%>", style="float:right">
+      <% else %>
+        <%= image_tag("placeholder.jpg", style: "float:right" )%>
       <% end %>
-    </p>
 
-  </fieldset>
+      <p>
+        <%= "Quantity: #{card.quantity}" %>
 
-  <br/>
+        <%= form_for card do |f| %>
 
-<%end %>
+          <%= f.label :value, "Value(s):" %>
+          </br>
+          <%= f.text_area :value, :disabled => true %>
+
+          </br></br>
+
+          <%= f.label :quality, "Quality:" %>
+          </br>
+          <%= f.text_area :quality, :disabled => true %>
+
+        <% end %>
+      </p>
+
+    </fieldset>
+
+    <br/>
+
+  <%end %>
+</div>

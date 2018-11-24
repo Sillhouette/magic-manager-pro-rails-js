@@ -8,7 +8,7 @@ function getCards() {
     $.get("/users/" + id + "/user_cards.json", function(data) {
 
       var complete = ``
-      
+
       data.forEach(function(card) {
         const markup = new Card(card).html()
         complete += markup
@@ -40,10 +40,9 @@ class Card {
   }
 
   html() {
-
     let image = `<img src="` + this.image_url + `" style="float:right"`
     if (!this.image_url){
-      image = `<img src="placeholder.jpg" style="float:right"`
+      image = `<img style="float:right" src="/assets/placeholder-366d968b285bfb25d2067a60fa8805c3f685c3085c0d2288504f9b279b0f8c69.jpg">`
     }
 
     let result = `
