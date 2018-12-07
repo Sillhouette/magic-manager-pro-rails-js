@@ -1,13 +1,13 @@
 function getCards() {
-  var cardToggleButton = document.getElementById("toggle_cards");
+  let cardToggleButton = document.getElementById("toggle_cards");
   if ($("#user_cards").html() === "") {
 
     cardToggleButton.innerText = "Hide Cards";
-    var id = $(this).data("id");
+    let id = $(this).data("id");
 
     $.get("/users/" + id + "/user_cards.json", function(data) {
 
-      var complete = ``
+      let complete = ``
 
       data.forEach(function(card) {
         const markup = new Card(card).html()
@@ -16,7 +16,7 @@ function getCards() {
       $("#user_cards").html(complete)
     });
   } else {
-    var card_block = document.getElementById("user_cards");
+    let card_block = document.getElementById("user_cards");
     if (card_block.style.display === "none") {
         cardToggleButton.innerText = "Hide Cards"
         card_block.style.display = "block";

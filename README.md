@@ -1,6 +1,6 @@
 # MTG Manager Pro
 
-Manage your MTG cards and create decks from them.
+Manage your MTG cards and create decks from them, now includes JS functionality for provide a smoother user experience.
 
 ## Installation
 

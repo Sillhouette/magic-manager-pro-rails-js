@@ -1,22 +1,25 @@
 function getDecks(){
-  var deckToggleButton = document.getElementById("toggle_decks");
+  let deckToggleButton = document.getElementById("toggle_decks");
   if ($("#user_decks").html() === ""){
 
     deckToggleButton.innerText = "Hide Decks";
-    var id = $(this).data("id");
+    let id = deckToggleButton.dataset.id;
 
-    $.get("/users/" + id + "/decks.json", function(data) {
+    $.get("/users/" + id + "/decks", function(data) {
 
-      var complete = ``
+      let decksMarkup = ``
 
       data.forEach(function(deck) {
-        const markup = new Deck(deck).html()
-        complete += markup
+        let currentDeck = new Deck(deck)
+        const currentDeckMarkup = currentDeck.html()
+
+        decksMarkup += currentDeckMarkup
       });
-      $("#user_decks").html(complete)
-    });
+      $("#user_decks").html(decksMarkup)
+      alphabetizeDeckEventListener()
+    }, "json");
   } else {
-    var deck_block = document.getElementById("user_decks");
+    let deck_block = document.getElementById("user_decks");
     if (deck_block.style.display === "none") {
         deckToggleButton.innerText = "Hide Decks"
         deck_block.style.display = "block";
@@ -27,66 +30,120 @@ function getDecks(){
   }
 }
 
-class Deck {
-  constructor(deck) {
-    this.id = deck.id;
-    this.name = deck.name;
-    this.user_id = deck.user_id;
-    this.format = deck.format;
-    this.num_cards = deck.deck_cards.length;
+const Deck = (function () {
 
-    this.cards = deck.deck_cards.map(function(card){
-      return new DeckCard(card);
-    });
-  }
+  const allDecks = [];
 
-  deckCards(){
+  return class {
+    constructor(deck) {
+      this.id = deck.id;
+      this.name = deck.name;
+      this.userId = deck.user_id;
+      this.format = deck.format;
+      this.numCards = deck.deck_cards.length;
 
-      let html = ``
-
-      this.cards.forEach(function(card) {
-        html += card.html()
+      this.cards = deck.deck_cards.map(function(card){
+        return new DeckCard(card);
       });
 
-      return html;
+      allDecks.push(this);
+    }
+
+    static all(){
+      return allDecks;
+    }
+
+    deckCards(){
+
+        let deckCardsMarkup = ``
+
+        this.cards.forEach(function(card) {
+          deckCardsMarkup += card.html()
+        });
+
+        return deckCardsMarkup;
+    }
+
+    alphabetizeDeckCards(){
+
+      let sorted = this.cards.sort(function(a, b){
+        let nameA = a.name.toUpperCase();
+        let nameB = b.name.toUpperCase();
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        return 0;
+      })
+
+      let alphabetizedDeckCardsMarkup = ``
+
+      sorted.forEach(function(card) {
+        alphabetizedDeckCardsMarkup += card.html()
+      });
+      return alphabetizedDeckCardsMarkup;
+    }
+
+    html() {
+
+      let result = `
+         <div id='deck_` + this.id + `'>
+          <fieldset>
+            <legend><h4> ` + this.name + `
+
+            <button type="button" id="deck_`+ this.id + `_toggle" onclick="toggleDeckDetails(`+ this.id +`)" >View Details</button>
+
+            <form method='Update' action='/users/` + this.userId + `/decks/` + this.id + `/edit' form={ style="display:inline-block"}>
+               <input value='Edit' type='submit' />
+             </form>
+
+
+            <form method='post' action='/users/` + this.userId + `/decks/` + this.id + `' data-remote='true' form={ style="display:inline-block"}>
+               <input name='_method' value='delete' type='hidden' />
+               <input value='Delete' type='submit' />
+             </form>
+            </h4></legend>
+
+            <p>
+              Format: ` + this.format + `<br/>
+              Cards: ` + this.numCards + `
+            </p>
+
+            <div id='deck_` + this.id + `_cards' style="display:none">
+                <button class="alphabetizeButtons" type="button" id=`+ this.id + `>Alphabetize</button>
+                <div id='deck_` + this.id + `_cards_container'>
+                  ` + this.deckCards() + `
+                </div>
+            </div>
+
+          </fieldset>
+        </div>
+      `
+      return result
+    }
   }
+})()
 
-  html() {
+function alphabetizeDeckEventListener(){
+   $(".alphabetizeButtons").on("click", (event) => {
 
-    let result = `
-       <div id='deck_` + this.id + `'>
-        <fieldset>
-          <legend><h4> ` + this.name + `
+     event.preventDefault()
 
-          <button type="button" id="deck_`+ this.id + `_toggle" onclick="toggleDeckDetails(`+ this.id +`)" >View Details</button>
+     let currentDeck = Deck.all().find(function(deck) {
+      return deck.id === parseInt(event.target.id);
+     })
 
-          <form method='Update' action='/users/` + this.user_id + `/decks/` + this.id + `/edit' form={ style="display:inline-block"}>
-             <input value='Edit' type='submit' />
-           </form>
+     let alphabetizedCardsMarkup = currentDeck.alphabetizeDeckCards()
 
-
-          <form method='post' action='/users/` + this.user_id + `/decks/` + this.id + `' data-remote='true' form={ style="display:inline-block"}>
-             <input name='_method' value='delete' type='hidden' />
-             <input value='Delete' type='submit' />
-           </form>
-          </h4></legend>
-
-          <p>
-            Format: ` + this.format + `<br/>
-            Cards: ` + this.num_cards + `
-          </p>
-
-          <div id='deck_` + this.id + `_cards' style="display:none">` + this.deckCards() + `</div>
-        </fieldset>
-      </div>
-    `
-    return result
-  }
+     $("#deck_" + currentDeck.id + "_cards_container").html(alphabetizedCardsMarkup)
+   })
 }
 
 function toggleDeckDetails(deck_id){
-  var detailsToggleButton = document.getElementById("deck_" + deck_id + "_toggle");
-  var deck_block = document.getElementById("deck_" + deck_id + "_cards");
+  let detailsToggleButton = document.getElementById("deck_" + deck_id + "_toggle");
+  let deck_block = document.getElementById("deck_" + deck_id + "_cards");
     if (deck_block.style.display === "none") {
         detailsToggleButton.innerText = "Hide Details";
         deck_block.style.display = "block";
@@ -120,8 +177,8 @@ class DeckCard {
     let main_board_option = this.main_board_option ? "True" : "False";
     let side_board_option = this.side_board_option ? "True" : "False";
 
-    let html = ``
-     html += `
+    let deckCardMarkup = ``
+     deckCardMarkup += `
     <div id="deck_` + this.deck_id + `_card_` + this.id + `">
        <fieldset>
          <legend><h3> ` + this.name + `</h3></legend>
@@ -135,6 +192,6 @@ class DeckCard {
        </fieldset>
       </div>
     `
-    return html
+    return deckCardMarkup
   }
 }
