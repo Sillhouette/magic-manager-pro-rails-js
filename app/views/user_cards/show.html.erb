@@ -1,9 +1,9 @@
 <fieldset>
-  <legend><h4><%= @card.magic_card_name%>
-      <%=button_to "View Details", magic_card_path(@card.magic_card_id), method: "get", form: { style: "display:inline-block"} %>
-      <%=button_to "Edit", edit_user_card_path(@card), method: "get", form: { style: "display:inline-block"} %>
-      <%=button_to "Delete", @card, :method => :delete, form: { style: "display:inline-block"} %>
-    </h4>
+  <legend><h3><%= @card.magic_card_name%>
+      <%=button_to "View Details", magic_card_path(@card.magic_card_id), method: "get", form: { style: "display:inline-block"}, class: 'ui circular button teal' %>
+      <%=button_to "Edit", edit_user_card_path(@card), method: "get", form: { style: "display:inline-block"}, class: 'ui circular button teal' %>
+      <%=button_to "Delete", @card, :method => :delete, form: { style: "display:inline-block"}, class: 'ui circular button teal' %>
+    </h3>
   </legend>
 
   <% if MagicCard.find_by(id: @card.magic_card_id).image_url %>
@@ -12,22 +12,35 @@
     <%= image_tag("placeholder.jpg", style: "float:right" )%>
   <% end %>
 
-  <p>
-    <%= "Quantity: #{@card.quantity}" %>
+    <br/><br/>
+
+    <div class="ui labeled input">
+      <div class="ui label">
+        Quantity:
+      </div>
+        <textarea disabled="disabled"><%= @card.quantity %></textarea>
+    </div>
+
+    <br/><br/><br/><br/>
 
     <%= form_for @card do |f| %>
 
-      <%= f.label :value, "Value(s):" %>
-      <br/>
-      <%= f.text_area :value, :disabled => true %>
+      <div class="ui labeled input">
+        <div class="ui label">
+          Value(s):
+        </div>
+          <%= f.text_area :value, :disabled => true %>
+      </div>
 
-      <br/><br/>
+      <br/><br/><br/><br/>
 
-      <%= f.label :quality, "Quality:" %>
-      <br/>
-      <%= f.text_area :quality, :disabled => true %>
+      <div class="ui labeled input">
+        <div class="ui label">
+          Quality:
+        </div>
+        <%= f.text_area :quality, :disabled => true %>
+      </div>
 
     <% end %>
-  </p>
 
 </fieldset>

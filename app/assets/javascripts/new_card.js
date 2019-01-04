@@ -17,6 +17,7 @@ $(document).on("turbolinks:load", function() {
           $("#error-container").html(resp);
         } else {
           $("#new_user_card")[0].reset();
+          $("#error-container").html("");
           $("#card_submit").prop("disabled", false);
           $("#cards-container").append(resp);
         }
