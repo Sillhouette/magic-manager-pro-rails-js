@@ -6,24 +6,32 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.css' %>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class="<%= controller_name %> <%= action_name %>">
-    <!-- <background="<%= asset_path 'MTG-background.jpg' %>" -->
+  <body class="<%= controller_name %> <%= action_name %> landing-image">
     <% if logged_in? %>
-      <div>
-        <%= render partial: "./logout_button"%>
-        <%= link_to button_tag("hidden"), "", :style => "visibility:hidden;" %>
-        <%= link_to button_tag("Decks Index"), user_decks_path(current_user), :style => "float:right; display:inline-block;" %>
-        <%= link_to button_tag("Cards Index"), user_user_cards_path(current_user), :style => "float: right; display:inline-block;" %>
-        <%= link_to button_tag("Profile Page"), user_path(current_user), :style => "float: right; display:inline-block;" %>
+      <div class="ui secondary menu padding10">
+        <div class="right menu">
+          <%= render partial: "./logout_button"%>
+            <%= link_to button_tag("Decks Index", class: 'ui large inverted circular button green'), user_decks_path(current_user) %>
+            <%= link_to button_tag("Cards Index", class: 'ui large inverted circular button green'), user_user_cards_path(current_user) %>
+            <%= link_to button_tag("Profile Page", class: 'ui large inverted circular button green'), user_path(current_user)%>
+        </div>
       </div>
     <% end %>
 
     <% if flash[:error] %>
-      <p id="notice"><%= flash[:error] %></p>
+      <div class="ui error message">
+        <div class="header">
+          There was an error:
+        </div>
+        <ul class="list">
+          <li><%= flash[:error] %></li>
+        </ul>
+      </div>
     <% end %>
 
     <%= yield %>

@@ -1,14 +1,31 @@
 <%= form_for @user do |f| %>
-  <%= f.label :name, "Name:" %> </br>
-  <%= f.text_field :name, placeholder: "Required" %></br>
 
-  <%= f.label :dci_number, "DCI Number:"%> </br>
-  <%= f.number_field :dci_number, placeholder: "Optional" %> </br>
+  <div class="ui labeled input">
+    <div class="ui label">
+      <%= f.label :name, "Name:" %> <br/>
+    </div>
+    <%= f.text_field :name, placeholder: "Required" %>
+  </div>
 
-  <%= f.label :password, "Password:" %> </br>
-  <%= f.password_field :password, placeholder: "Required" %> </br>
+  <br/><br/>
 
-  </br>
+  <div class="ui labeled input">
+    <div class="ui label">
+      <%= f.label :dci_number, "DCI Number:"%>
+    </div>
+    <%= f.number_field :dci_number, placeholder: "Optional" %>
+  </div>
 
-  <%= f.submit %>
+  <br/><br/>
+
+  <div class="ui labeled input">
+    <div class="ui label">
+      <%= f.label :password, "Password:" %> <br/>
+    </div>
+    <%= f.password_field :password, placeholder: "Required" %> <br/>
+  </div>
+
+  <br/><br/>
+
+  <%= f.submit class: "ui circular button primary" %>
 <% end %>

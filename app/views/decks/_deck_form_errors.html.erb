@@ -1,11 +1,11 @@
 <% if @deck.errors.any? %>
-  <div id="error_explanation">
-    <h2>
+  <div class="ui error message" id="error_explanation">
+    <div class="header">
       <%= pluralize(@deck.errors.count, "error") %>
       prohibited this post from being saved:
-    </h2>
+    </div>
 
-    <ul>
+    <ul class="list">
     <% @deck.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
     <% end %>

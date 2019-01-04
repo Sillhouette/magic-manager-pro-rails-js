@@ -1,29 +1,37 @@
-<fieldset>
-  <legend><h2><%=current_user.name.titlecase%>'s Cards: </h2></legend>
+<div  class="ui container transbox">
+  <fieldset>
+    <legend><h2><%=current_user.name.titlecase%>'s Cards: </h2></legend>
 
-    <%= render partial: "user_card_errors"%>
+      <fieldset>
+        <legend><h2>Add a new card to your Account: </h2></legend>
 
-    <fieldset>
-      <legend><h2>Add a new card to your Account: </h2></legend>
+        <div id="error-container">
+          <%= render partial: "user_card_errors"%>
+        </div>
+        
+        <%= render partial: "user_card_form", locals: {editing: false}%>
 
-      <%= render partial: "user_card_form", locals: {editing: false}%>
-
-    </fieldset>
+      </fieldset>
 
 
-    <br/><br/>
+      <br/><br/>
 
-    <%= form_tag(user_user_cards_path(current_user), method: "get") do %>
+      <%= form_tag(user_user_cards_path(current_user), method: "get") do %>
 
-      <%= label_tag(:card_type, "Filter cards by type:") %>
-      <%= select_tag(:card_type, options_for_select(MagicCard.types, params[:card_type]), :prompt => "All")%>
+      <div class="ui labeled input">
+        <div class="ui label">
+          Filter by Type:
+        </div>
+        <%= select_tag(:card_type, options_for_select(MagicCard.types, params[:card_type]), :prompt => "All")%>
+      </div>
 
-      <%=submit_tag("Filter") %>
+        <%=submit_tag("Filter", :class => 'ui circular button primary') %>
 
-    <% end %>
+      <% end %>
 
-    <br/> <br/>
+      <br/> <br/>
 
-    <%= render partial: "user_cards/index_list", locals: {update_delete_buttons: true} %>
+      <%= render partial: "user_cards/index_list", locals: {update_delete_buttons: true} %>
 
-</fieldset>
+  </fieldset>
+</div>

@@ -1,23 +1,28 @@
-<fieldset>
-  <legend><h2><%=@user.name.titlecase%>'s Decks: </h2></legend>
+<div class="ui container">
+  <div class="item text-color"
+    <fieldset class="ui container">
+      <div class="ui container transbox">
+        <h2><%=@user.name.titlecase%>'s Decks: </h2>
 
-    <%= render partial: "new_deck_submit_form"  %>
+          <%= render partial: "new_deck_submit_form"  %>
 
-    <br/> <br/>
+          <br/> <br/>
 
-  <%@user.decks.each do |deck| %>
-    <fieldset>
-      <legend><h4><%= deck.name%>
-        <%=button_to "View Details", user_deck_path(@user, deck), method: "get", form: { style: "display:inline-block"} %>
-      </h4></legend>
+        <%@user.decks.each do |deck| %>
+          <fieldset>
+            <legend><h2><%= deck.name%>
+              <%=button_to "View Details", user_deck_path(@user, deck), method: "get", form: { style: "display:inline-block"}, class:'ui circular button primary' %>
+            </h2></legend>
 
-      <p>
-        <%= "Format: #{deck.format}" %> <br/>
-        <%= "Cards: #{deck.deck_cards.count}" %>
-      </p>
+            <p>
+              <%= "Format: #{deck.format}" %> <br/>
+              <%= "Cards: #{deck.deck_cards.count}" %>
+            </p>
+          </fieldset>
+
+          <br/>
+        <%end %>
+      </div>
     </fieldset>
-
-    <br/>
-
-  <%end %>
-</fieldset>
+  </div>
+</div>

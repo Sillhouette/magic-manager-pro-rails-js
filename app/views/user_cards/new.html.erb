@@ -1,8 +1,10 @@
-<%= render partial: "user_card_errors"%>
+<div class="ui container transbox">
+  <fieldset>
+    <legend><h2>Add a new card to your Account: </h2></legend>
 
-<fieldset>
-  <legend><h2>Add a new card to your Account: </h2></legend>
+    <%= render partial: "user_card_errors"%>
 
-  <%= render partial: "user_card_form", locals: {editing: false}%>
+    <%= render partial: "user_card_form", locals: {editing: false}%>
 
-</fieldset>
+  </fieldset>
+</div>

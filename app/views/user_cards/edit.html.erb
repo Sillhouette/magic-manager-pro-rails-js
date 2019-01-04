@@ -1,8 +1,10 @@
-<%= render partial: "user_card_errors"%>
+<div class="ui container transbox">
+  <fieldset>
+    <legend><h2>Edit <%= @card.magic_card_name%>: </h2></legend>
 
-<fieldset>
-  <legend><h2>Edit <%= @card.magic_card.name%>: </h2></legend>
+    <%= render partial: "user_card_errors"%>
 
-  <%= render partial: "user_card_form", locals: {editing: true}  %>
+    <%= render partial: "user_card_form", locals: {editing: true}  %>
 
-</fieldset>
+  </fieldset>
+</div>

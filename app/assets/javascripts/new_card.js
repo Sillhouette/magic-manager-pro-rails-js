@@ -1,22 +1,26 @@
-$(document).on("turbolinks:load", function(){
+$(document).on("turbolinks:load", function() {
   let form = document.querySelector('form[id="new_user_card"]');
-  if(!form){
-    return
+  if (!form) {
+    return;
   }
 
-  form.addEventListener('submit', function(event) {
-      event.preventDefault();
+  form.addEventListener("submit", function(event) {
+    event.preventDefault();
 
-      $.ajax({
-        type: this.method,
-        url: this.action,
-        data: $(this).serialize(),
-        success: function(resp){
-          $("#new_user_card")[0].reset()
-          $('#card_submit').prop('disabled', false);
+    $.ajax({
+      type: this.method, //post
+      url: this.action, //user_cards
+      data: $(this).serialize(),
+      success: function(resp) {
+        if (resp.includes("error")) {
+          $("#card_submit").prop("disabled", false);
+          $("#error-container").html(resp);
+        } else {
+          $("#new_user_card")[0].reset();
+          $("#card_submit").prop("disabled", false);
           $("#cards-container").append(resp);
         }
-      });
-
+      }
+    });
   });
 });

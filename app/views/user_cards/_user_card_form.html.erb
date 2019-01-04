@@ -1,38 +1,56 @@
 <%= form_for @card do |f| %>
-  <%= f.label :magic_card_name, "Card Name:" %>
-  <%= f.text_field :magic_card_name, list: 'card-name', readonly: editing ? true : nil %>
-  <datalist id="card-name">
-    <% MagicCard.all.each do |card| %>
-      <option value="<%=card.name + " - " + card.setname%>"></option>
-    <% end %>
-  </datalist>
 
-  </br></br>
+  <br/>
 
   <% if MagicCard.find_by(id: @card.magic_card_id) != nil && MagicCard.find_by(id: @card.magic_card_id).image_url %>
-    <img src="<%=MagicCard.find(@card.magic_card_id).image_url%>", style="float:right">
+    <img src="<%=MagicCard.find(@card.magic_card_id).image_url%>", class="ui right floated image card-image">
   <% else %>
     <% if editing %>
       <%= image_tag("placeholder.jpg", style: "float:right" )%>
     <% end %>
   <% end %>
 
-  <%= f.label :quantity, "Quantity:" %>
-  <%= f.number_field :quantity%>
+  <div class="ui labeled input">
+    <div class="ui label">
+      Card Name:
+    </div>
+    <%= f.text_field :magic_card_name, list: 'card-name', readonly: editing ? true : nil %>
+  </div>
+
+  <datalist id="card-name">
+    <% MagicCard.pluck(:name, :setname).map do |card| %>
+      <option value="<%=card[0] + " - " + card[1] %>"></option>
+    <% end %>
+  </datalist>
 
   </br></br>
 
-  <%= f.label :value, "Describe the value of each card" %>:
-  </br>
-  <%= f.text_area :value%>
+  <div class="ui labeled input">
+    <div class="ui label">
+      Quantity:
+    </div>
+    <%= f.number_field :quantity%>
+  </div>
 
   </br></br>
 
-  <%= f.label :quality, "Describe the quality of each card" %>:
-  </br>
-  <%= f.text_area :quality%>
+  <div class="ui labeled input">
+    <div class="ui label">
+      Value of each card:
+    </div>
+    <%= f.text_area :value%>
+  </div>
 
   </br></br>
 
-  <%= f.submit editing ? "Submit" : "Add Card", :id => "card_submit", :autocomplete => "off" %>
+  <div class="ui labeled input">
+    <div class="ui label">
+      Quality of each card:
+    </div>
+    <%= f.text_area :quality%>
+  </div>
+
+  </br></br>
+
+  <%= f.submit editing ? "Submit" : "Add Card", :id => "card_submit", :autocomplete => "off", :class => "ui circular button primary" %>
 <% end %>

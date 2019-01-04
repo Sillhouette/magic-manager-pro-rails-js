@@ -1,8 +1,10 @@
-<%= render partial: "deck_form_errors"%>
+<div class="ui container transbox">
+  <fieldset>
+    <legend><h2>Edit <%= @deck.name%>: </h2></legend>
 
-<fieldset>
-  <legend><h2>Edit <%= @deck.name%>: </h2></legend>
+    <%= render partial: "deck_form_errors"%>
 
-  <%= render partial: "deck_form"  %>
+    <%= render partial: "deck_form"  %>
 
-</fieldset>
+  </fieldset>
+</div>

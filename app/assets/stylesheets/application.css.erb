@@ -1,0 +1,131 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+.landing-image {
+  background: url("<%= asset_path 'MTG-background.jpg' %>") no-repeat center center fixed !important;
+  -webkit-background-size: cover !important;
+  -moz-background-size: cover !important;
+  -o-background-size: cover !important;
+  background-size: cover !important;
+}
+
+.text-color {
+  color: black;
+}
+
+.transbox {
+  padding: 30px;
+  background-color: rgba(255,255,255,0.80);
+  border-radius:8px;
+  filter: alpha(opacity=80); /* For IE8 and earlier */
+}
+
+.ui.segment {
+  background: #ffffff00 !important;
+  height: 335px;
+}
+
+.ui.segment.deck-show-segment {
+  background: rgba(255,255,255,0.80) !important;
+  color: black !important;
+  height: 335px;
+}
+
+.card-image {
+  border-radius: 5%;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.padding10 {
+  padding-top: 10px;
+  padding-right: 10px;
+  margin-bottom: 20px;
+}
+
+.center {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+
+.center-vert-div {
+     position: absolute;
+     margin: auto;
+     top: 0;
+     right: 0;
+     bottom: 0;
+     left: 0;
+     width: 100px;
+     height: 100px;
+}
+
+.outer-div
+{
+     display: table;
+     position: absolute;
+     height: 100%;
+     width: 100%;
+}
+.mid-div
+{
+     display: table-cell;
+     vertical-align: middle;
+}
+.inner-div
+{
+     margin: 0 auto;
+}
+
+.center-div
+{
+     position: absolute;
+     margin: auto;
+     top: 0;
+     right: 0;
+     bottom: 0;
+     left: 0;
+     width: 100px;
+     height: 100px;
+}
+
+.centered-container
+{
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     height: 100vh;
+}
+.centered-item
+{
+     background-color: #f3f2ef;
+     border-radius: 3px;
+     width: 200px;
+     height: 100px;
+}
+
+.z1 {
+  z-index: 1;
+}
+
+fieldset {
+    margin: 10px;
+    border:2px solid green;
+    -moz-border-radius:8px;
+    -webkit-border-radius:8px;
+    border-radius:8px;
+}

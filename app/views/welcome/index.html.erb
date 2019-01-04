@@ -1,12 +1,38 @@
-<fieldset>
-  <legend><h1>Welcome to Magic Manager Pro</h1></legend>
+<div class="outer-div">
+  <div class="mid-div">
+    <div class="ui container transbox inner-div">
+      <fieldset>
+        <legend><h1>Welcome to Magic Manager Pro</h1></legend>
+          <%= form_for @user, url: login_path, method: :post do |f| %>
 
-  <%= form_tag(login_path, method: "get") do %>
-    <%= submit_tag("Log In") %></h4></br>
-  <% end %>
+            <h2>Login:</h2>
 
-  <%= form_tag(new_user_path, method: "get") do %>
-    <%= submit_tag("Create an Account") %></h4></br>
-  <% end %>
+            <br/>
 
-</fieldset>
+            <div class="ui labeled input">
+              <div class="ui label">
+                <%= f.label :id, "Your Name:" %><br/>
+              </div>
+              <%= f.text_field :name %> <br/>
+            </div>
+
+            <br/><br/>
+
+            <div class="ui labeled input">
+              <div class="ui label">
+                <%= f.label :password %><br/>
+              </div>
+              <%= f.password_field :password, id: "password" %><br/>
+            </div>
+
+            <br/><br/>
+
+            <%= f.submit "Sign In", class: 'ui circular button primary' %>
+            <br/><br/>
+            <%= link_to('Log in with Facebook', '/auth/facebook', class: "ui circular button primary") %>
+            <%= link_to('Sign Up', new_user_path, class: 'ui circular button primary') %>
+          <% end %>
+      </fieldset>
+    </div>
+  </div>
+ </div>

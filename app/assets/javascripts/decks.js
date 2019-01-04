@@ -1,37 +1,38 @@
-function getDecks(){
+function getDecks() {
   let deckToggleButton = document.getElementById("toggle_decks");
-  if ($("#user_decks").html() === ""){
-
+  if ($("#user_decks").html() === "") {
     deckToggleButton.innerText = "Hide Decks";
     let id = deckToggleButton.dataset.id;
 
-    $.get("/users/" + id + "/decks", function(data) {
+    $.get(
+      "/users/" + id + "/decks",
+      function(data) {
+        let decksMarkup = ``;
 
-      let decksMarkup = ``
+        data.forEach(function(deck) {
+          let currentDeck = new Deck(deck);
+          const currentDeckMarkup = currentDeck.html();
 
-      data.forEach(function(deck) {
-        let currentDeck = new Deck(deck)
-        const currentDeckMarkup = currentDeck.html()
-
-        decksMarkup += currentDeckMarkup
-      });
-      $("#user_decks").html(decksMarkup)
-      alphabetizeDeckEventListener()
-    }, "json");
+          decksMarkup += currentDeckMarkup;
+        });
+        $("#user_decks").html(decksMarkup);
+        alphabetizeDeckEventListener();
+      },
+      "json"
+    );
   } else {
     let deck_block = document.getElementById("user_decks");
     if (deck_block.style.display === "none") {
-        deckToggleButton.innerText = "Hide Decks"
-        deck_block.style.display = "block";
+      deckToggleButton.innerText = "Hide Decks";
+      deck_block.style.display = "block";
     } else {
-      deckToggleButton.innerText = "View Decks"
+      deckToggleButton.innerText = "View Decks";
       deck_block.style.display = "none";
     }
   }
 }
 
-const Deck = (function () {
-
+const Deck = (function() {
   const allDecks = [];
 
   return class {
@@ -42,31 +43,29 @@ const Deck = (function () {
       this.format = deck.format;
       this.numCards = deck.deck_cards.length;
 
-      this.cards = deck.deck_cards.map(function(card){
+      this.cards = deck.deck_cards.map(function(card) {
         return new DeckCard(card);
       });
 
       allDecks.push(this);
     }
 
-    static all(){
+    static all() {
       return allDecks;
     }
 
-    deckCards(){
+    deckCards() {
+      let deckCardsMarkup = ``;
 
-        let deckCardsMarkup = ``
+      this.cards.forEach(function(card) {
+        deckCardsMarkup += card.html();
+      });
 
-        this.cards.forEach(function(card) {
-          deckCardsMarkup += card.html()
-        });
-
-        return deckCardsMarkup;
+      return deckCardsMarkup;
     }
 
-    alphabetizeDeckCards(){
-
-      let sorted = this.cards.sort(function(a, b){
+    alphabetizeDeckCards() {
+      let sorted = this.cards.sort(function(a, b) {
         let nameA = a.name.toUpperCase();
         let nameB = b.name.toUpperCase();
         if (nameA < nameB) {
@@ -76,85 +75,116 @@ const Deck = (function () {
           return 1;
         }
         return 0;
-      })
+      });
 
-      let alphabetizedDeckCardsMarkup = ``
+      let alphabetizedDeckCardsMarkup = ``;
 
       sorted.forEach(function(card) {
-        alphabetizedDeckCardsMarkup += card.html()
+        alphabetizedDeckCardsMarkup += card.html();
       });
       return alphabetizedDeckCardsMarkup;
     }
 
     html() {
-
-      let result = `
-         <div id='deck_` + this.id + `'>
+      let result =
+        `
+         <div id='deck_` +
+        this.id +
+        `'>
           <fieldset>
-            <legend><h4> ` + this.name + `
+            <legend><h3> ` +
+        this.name +
+        `
 
-            <button type="button" id="deck_`+ this.id + `_toggle" onclick="toggleDeckDetails(`+ this.id +`)" >View Details</button>
+            <button class="ui circular tiny button teal" type="button" id="deck_` +
+        this.id +
+        `_toggle" onclick="toggleDeckDetails(` +
+        this.id +
+        `)" >View Details</button>
 
-            <form method='Update' action='/users/` + this.userId + `/decks/` + this.id + `/edit' form={ style="display:inline-block"}>
-               <input value='Edit' type='submit' />
+            <form method='Update' action='/users/` +
+        this.userId +
+        `/decks/` +
+        this.id +
+        `/edit' form={ style="display:inline-block"}>
+               <input class="ui circular tiny button teal" value='Edit' type='submit' />
              </form>
 
 
-            <form method='post' action='/users/` + this.userId + `/decks/` + this.id + `' data-remote='true' form={ style="display:inline-block"}>
+            <form method='post' action='/users/` +
+        this.userId +
+        `/decks/` +
+        this.id +
+        `' data-remote='true' form={ style="display:inline-block"}>
                <input name='_method' value='delete' type='hidden' />
-               <input value='Delete' type='submit' />
+               <input class="ui circular tiny button teal" value='Delete' type='submit' />
              </form>
-            </h4></legend>
+            </h3></legend>
 
             <p>
-              Format: ` + this.format + `<br/>
-              Cards: ` + this.numCards + `
+              Format: ` +
+        this.format +
+        `<br/>
+              Cards: ` +
+        this.numCards +
+        `
             </p>
 
-            <div id='deck_` + this.id + `_cards' style="display:none">
-                <button class="alphabetizeButtons" type="button" id=`+ this.id + `>Alphabetize</button>
-                <div id='deck_` + this.id + `_cards_container'>
-                  ` + this.deckCards() + `
+            <div id='deck_` +
+        this.id +
+        `_cards' style="display:none">
+                <button class="alphabetizeButtons ui circular tiny button teal" type="button" id=` +
+        this.id +
+        `>Alphabetize</button>
+                <div id='deck_` +
+        this.id +
+        `_cards_container'>
+                  ` +
+        this.deckCards() +
+        `
                 </div>
             </div>
 
           </fieldset>
         </div>
-      `
-      return result
+      `;
+      return result;
     }
-  }
-})()
+  };
+})();
 
-function alphabetizeDeckEventListener(){
-   $(".alphabetizeButtons").on("click", (event) => {
+function alphabetizeDeckEventListener() {
+  $(".alphabetizeButtons").on("click", event => {
+    event.preventDefault();
 
-     event.preventDefault()
-
-     let currentDeck = Deck.all().find(function(deck) {
+    let currentDeck = Deck.all().find(function(deck) {
       return deck.id === parseInt(event.target.id);
-     })
+    });
 
-     let alphabetizedCardsMarkup = currentDeck.alphabetizeDeckCards()
+    let alphabetizedCardsMarkup = currentDeck.alphabetizeDeckCards();
 
-     $("#deck_" + currentDeck.id + "_cards_container").html(alphabetizedCardsMarkup)
-   })
+    $("#deck_" + currentDeck.id + "_cards_container").html(
+      alphabetizedCardsMarkup
+    );
+  });
 }
 
-function toggleDeckDetails(deck_id){
-  let detailsToggleButton = document.getElementById("deck_" + deck_id + "_toggle");
+function toggleDeckDetails(deck_id) {
+  let detailsToggleButton = document.getElementById(
+    "deck_" + deck_id + "_toggle"
+  );
   let deck_block = document.getElementById("deck_" + deck_id + "_cards");
-    if (deck_block.style.display === "none") {
-        detailsToggleButton.innerText = "Hide Details";
-        deck_block.style.display = "block";
-    } else {
-        detailsToggleButton.innerText = "View Details"
-        deck_block.style.display = "none";
-    }
+  if (deck_block.style.display === "none") {
+    detailsToggleButton.innerText = "Hide Details";
+    deck_block.style.display = "block";
+  } else {
+    detailsToggleButton.innerText = "View Details";
+    deck_block.style.display = "none";
+  }
 }
 
 class DeckCard {
-  constructor(card){
+  constructor(card) {
     this.id = card.id;
     this.deck_id = card.deck_id;
     this.name = card.user_card.magic_card_name;
@@ -167,31 +197,52 @@ class DeckCard {
   }
 
   html() {
-    let image = `<img src="` + this.image_url + `" style="float:right"`
-    if (!this.image_url){
-      image = `<img src="placeholder.jpg" style="float:right"`
+    let image = `<img src="` + this.image_url + `" style="float:right"`;
+    if (!this.image_url) {
+      image = `<img src="placeholder.jpg" style="float:right"`;
     }
 
-    let main_board_quantity = this.main_board_quantity ? this.main_board_quantity : "0";
-    let side_board_quantity = this.side_board_quantity ? this.side_board_quantity : "0";
+    let main_board_quantity = this.main_board_quantity
+      ? this.main_board_quantity
+      : "0";
+    let side_board_quantity = this.side_board_quantity
+      ? this.side_board_quantity
+      : "0";
     let main_board_option = this.main_board_option ? "True" : "False";
     let side_board_option = this.side_board_option ? "True" : "False";
 
-    let deckCardMarkup = ``
-     deckCardMarkup += `
-    <div id="deck_` + this.deck_id + `_card_` + this.id + `">
+    let deckCardMarkup = ``;
+    deckCardMarkup +=
+      `
+    <div id="deck_` +
+      this.deck_id +
+      `_card_` +
+      this.id +
+      `">
        <fieldset>
-         <legend><h3> ` + this.name + `</h3></legend>
+         <legend><h3> ` +
+      this.name +
+      `</h3></legend>
 
-         ` + image + `</br>
+         ` +
+      image +
+      `</br>
 
-         Main Board: ` + main_board_quantity + `<br/><br/><br/><br/>
-         Side Board: ` + side_board_quantity + `<br/><br/><br/><br/>
-         Main Board Option: ` + main_board_option + ` <br/><br/><br/><br/>
-         Side Board Option: ` + side_board_option + ` <br/><br/><br/><br/>
+         Main Board: ` +
+      main_board_quantity +
+      `<br/><br/><br/><br/>
+         Side Board: ` +
+      side_board_quantity +
+      `<br/><br/><br/><br/>
+         Main Board Option: ` +
+      main_board_option +
+      ` <br/><br/><br/><br/>
+         Side Board Option: ` +
+      side_board_option +
+      ` <br/><br/><br/><br/>
        </fieldset>
       </div>
-    `
-    return deckCardMarkup
+    `;
+    return deckCardMarkup;
   }
 }

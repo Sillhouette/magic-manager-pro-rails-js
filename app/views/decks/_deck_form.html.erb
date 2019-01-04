@@ -1,6 +1,11 @@
 <%= form_for [@user, @deck] do |deck_builder| %>
-  <%= deck_builder.label :name, "Deck Name:" %>
-  <%= deck_builder.text_field :name %>
+
+  <div class="ui labeled input">
+    <div class="ui label">
+      Deck Name:
+    </div>
+    <%= deck_builder.text_field :name %>
+  </div>
 
   <%= deck_builder.hidden_field :format %>
 
@@ -8,27 +13,43 @@
 
   <%= deck_builder.fields_for :deck_cards do |deck_card_builder| %>
 
-    <div>
+    <div class="ui segment">
 
-      <% card_id = deck_card_builder.object.user_card.id %>
-      <%= deck_card_builder.check_box :user_card_id, {checked: deck_card_builder.object.id ? true : false}, card_id, -card_id  %>
-      <%= deck_card_builder.label :user_card_id, "#{deck_card_builder.object.user_card.magic_card_name}:" %>
+      <img class="ui right floated image card-image" src=<%= deck_card_builder.object.user_card.magic_card.image_url %>>
+
+      <h2><div class="ui checkbox">
+        <% card_id = deck_card_builder.object.user_card.id %>
+        <%= deck_card_builder.check_box :user_card_id, {checked: deck_card_builder.object.id ? true : false}, card_id, -card_id  %>
+        <%= deck_card_builder.label :user_card_id, "#{deck_card_builder.object.user_card.magic_card_name}:" %>
+      </div></h2>
 
       <br/>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= deck_card_builder.label :main_board_quantity, "Main board quantity:" %>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= deck_card_builder.number_field :main_board_quantity %>
-      <br/>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= deck_card_builder.label :side_board_quantity, "Side board quantity:" %>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= deck_card_builder.number_field :side_board_quantity %>
-      <br/>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= deck_card_builder.label :main_board_option, "Main board option:" %>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= deck_card_builder.check_box :main_board_option %>
-      <br/>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= deck_card_builder.label :side_board_option, "Side board option:" %>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= deck_card_builder.check_box :side_board_option %>
-      <br/><br/>
-    </div>
+        <div class="ui labeled input">
+          <div class="ui label">
+            <%= deck_card_builder.label :main_board_quantity, "Main board quantity:" %>
+          </div>
+          <%= deck_card_builder.number_field :main_board_quantity %>
+        </div>
+        <br/><br/>
+        <div class="ui labeled input">
+          <div class="ui label">
+            <%= deck_card_builder.label :side_board_quantity, "Side board quantity:  " %>
+            </div>
+            <%= deck_card_builder.number_field :side_board_quantity %>
+        </div>
+        <br/><br/>
+        <div class="ui toggle checkbox">
+          <%= deck_card_builder.check_box :main_board_option %>
+          <%= deck_card_builder.label :main_board_option, "Main board option:" %>
+        </div>
+        <br/><br/>
+        <div class="ui toggle checkbox">
+          <%= deck_card_builder.check_box :side_board_option %>
+          <%= deck_card_builder.label :side_board_option, "Side board option:" %>
+        </div>
+        <br/><br/>
+      </div>
   <% end %>
 
-  <%= deck_builder.submit %>
+  <%= deck_builder.submit("Submit", :class => "ui circular button primary") %>
 <% end %>

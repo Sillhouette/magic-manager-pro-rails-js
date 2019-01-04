@@ -29,7 +29,7 @@ class UserCardsController < ApplicationController
         @card.save
           render :show, :layout => false
       else
-        render :new
+        render :template => "user_cards/_user_card_errors", :layout => false
       end
     end
   end
