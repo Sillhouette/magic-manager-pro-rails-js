@@ -5,24 +5,12 @@
     <%=button_to "Delete", user_deck_path(@user, @deck), :method => :delete, form: { style: "display:inline-block;"}, class:'ui circular button teal' %>
     </h2></legend>
 
-    <%= form_for [@user, @deck] do |f| %>
-
-      <h4>
-      <br/>
-        <div class="ui labeled input disabled">
-          <div class="ui label">
-            Format:
-          </div>
-          <%= f.text_field :format, :disabled => true %>
-        </div>
-      </h4>
-
-      <br/><br/>
-
-    <% end %>
+      <div class="ui compact olive message">
+        <strong>Format: </strong><%= @deck.format %>
+      </div>
 
       <% @deck.deck_cards.each do |card| %>
-        <div class='ui segment'>
+        <div class='ui grey segment'>
 
           <% if MagicCard.find_by(id: UserCard.find(card.user_card_id).magic_card_id).image_url %>
             <img src="<%=MagicCard.find_by(id: UserCard.find_by(id: card.user_card_id).magic_card_id).image_url%>", class="ui right floated image card-image"/>
@@ -30,32 +18,26 @@
             <%= image_tag("placeholder.jpg", class: 'ui right floated image card-image' )%>
           <% end %>
 
-          <h3><%=MagicCard.find_by(id: UserCard.find(card.user_card_id).magic_card_id).name %></h3>
+          <h3><%= UserCard.find(card.user_card_id).magic_card_name %></h3>
 
-          <div class="ui labeled input">
-            <div class="ui label">
-              <label>Main Board:</label>
-            </div>
-            <textarea disabled=true><%= card.main_board_quantity ? card.main_board_quantity : 0 %></textarea>
+          <div class="ui compact teal message">
+            <strong>Main Board: </strong><%= card.main_board_quantity ? card.main_board_quantity : 0 %>
           </div>
 
-          <br/><br/><br/>
+          <br/>
 
-          <div class="ui labeled input">
-            <div class="ui label">
-              <label>Side Board:</label>
-            </div>
-            <textarea disabled=true><%= card.side_board_quantity ? card.side_board_quantity : 0 %></textarea>
+          <div class="ui compact teal message">
+            <strong>Side Board: </strong><%= card.side_board_quantity ? card.side_board_quantity : 0 %>
           </div>
 
-          <br/><br/><br/>
+          <br/><br/>
 
           <div class="ui disabled toggle checkbox">
             <%= check_box_tag ' ', ' ', card.main_board_option, {disabled: true} %>
             <label>Main Board Option:</label>
           </div>
 
-          <br/><br/><br/>
+          <br/><br/>
 
           <div class="ui disabled toggle checkbox">
             <%= check_box_tag ' ', ' ', card.side_board_option, {disabled: true} %>

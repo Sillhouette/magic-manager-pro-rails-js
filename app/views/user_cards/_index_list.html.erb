@@ -15,36 +15,23 @@
         <%= image_tag("placeholder.jpg", class: "ui right floated image card-image" )%>
       <% end %>
 
-      <br/><br/>
+      <br/>
 
-      <div class="ui labeled input">
-        <div class="ui label">
-          Quantity:
-        </div>
-          <textarea disabled="disabled"><%= card.quantity %></textarea>
+      <div class="ui teal compact message">
+          <strong>Quantity: </strong><%= card.quantity %>
       </div>
 
-      <br/><br/><br/><br/>
+      <br/><br/>
 
-      <%= form_for card do |f| %>
+      <div class="ui teal compact message">
+          <strong>Value(s): </strong><%= card.value %>
+      </div>
 
-        <div class="ui labeled input">
-          <div class="ui label">
-            Value(s):
-          </div>
-            <%= f.text_area :value, :disabled => true %>
-        </div>
+      <br/><br/>
 
-        <br/><br/><br/><br/>
-
-        <div class="ui labeled input">
-          <div class="ui label">
-            Quality:
-          </div>
-          <%= f.text_area :quality, :disabled => true %>
-        </div>
-
-        <% end %>
+      <div class="ui teal compact message">
+          <strong>Quality: </strong><%= card.quality %>
+      </div>
 
     </fieldset>
 

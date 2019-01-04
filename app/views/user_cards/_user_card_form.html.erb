@@ -6,12 +6,12 @@
     <img src="<%=MagicCard.find(@card.magic_card_id).image_url%>", class="ui right floated image card-image">
   <% else %>
     <% if editing %>
-      <%= image_tag("placeholder.jpg", style: "float:right" )%>
+      <%= image_tag("placeholder.jpg", class: "ui right floated image card-image" )%>
     <% end %>
   <% end %>
 
   <div class="ui labeled input">
-    <div class="ui label">
+    <div class="ui violet label">
       Card Name:
     </div>
     <%= f.text_field :magic_card_name, list: 'card-name', readonly: editing ? true : nil %>
@@ -26,7 +26,7 @@
   </br></br>
 
   <div class="ui labeled input">
-    <div class="ui label">
+    <div class="ui violet label">
       Quantity:
     </div>
     <%= f.number_field :quantity%>
@@ -35,7 +35,7 @@
   </br></br>
 
   <div class="ui labeled input">
-    <div class="ui label">
+    <div class="ui violet label">
       Value of each card:
     </div>
     <%= f.text_area :value%>
@@ -44,7 +44,7 @@
   </br></br>
 
   <div class="ui labeled input">
-    <div class="ui label">
+    <div class="ui violet label">
       Quality of each card:
     </div>
     <%= f.text_area :quality%>

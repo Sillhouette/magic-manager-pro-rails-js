@@ -38,26 +38,27 @@ class Card {
   }
 
   html() {
-    let image = `<img src="` + this.image_url + `" style="float:right"`;
+    let image = `<img src="${
+      this.image_url
+    }" class="ui right floated image card-image"`;
     if (!this.image_url) {
-      image = `<img style="float:right" src="/assets/placeholder-366d968b285bfb25d2067a60fa8805c3f685c3085c0d2288504f9b279b0f8c69.jpg">`;
+      image = `<img class="ui right floated image card-image" src="/assets/placeholder-366d968b285bfb25d2067a60fa8805c3f685c3085c0d2288504f9b279b0f8c69.jpg">`;
     }
 
-    let result =
-      `
+    let result = `
       <div id='card_${this.id}'>
         <fieldset>
           <legend><h3> ${this.name}
 
-          <form method='Get' action='/magic_cards/` +
-      this.magic_card_id +
-      `' form={ style="display:inline-block"}>
+          <form method='Get' action='/magic_cards/${
+            this.magic_card_id
+          }' form={ style="display:inline-block"}>
              <input class="ui circular tiny button teal" value='View Details' type='submit' />
            </form>
 
-          <form method='Update' action='/user_cards/` +
-      this.id +
-      `/edit' form={ style="display:inline-block"}>
+          <form method='Update' action='/user_cards/${
+            this.id
+          }/edit' form={ style="display:inline-block"}>
              <input class="ui circular tiny button teal" value='Edit' type='submit' />
            </form>
 
@@ -69,33 +70,27 @@ class Card {
            </form>
           </h3></legend>
 
-          ` +
-      image +
-      `
+          ${image}
 
-          <p>
-            Quantity:</br>
-            <textarea disabled="disabled" name="user_card[quantity]" id="user_card_quantity">` +
-      this.quantity +
-      `</textarea>
+          <br/><br/>
 
-            </br></br>
+          <div class="ui teal compact message">
+            <strong>Quantity: </strong>${this.quantity}
+          </div>
 
-            Value(s):</br>
-            <textarea disabled="disabled" name="user_card[value]" id="user_card_value">` +
-      this.value +
-      `</textarea>
+          </br><br/>
 
-            </br></br>
+          <div class="ui teal compact message">
+            <strong>Value(s): </strong>${this.value}
+          </div>
 
-            Quality:</br>
-            <textarea disabled="disabled" name="user_card[quality]" id="user_card_quality">` +
-      this.quality +
-      `</textarea>
-          </p>
+          </br><br/>
+
+          <div class="ui teal compact message">
+            <strong>Quality: </strong>${this.quality}
+          </div>
         </fieldset>
-      </div>
-    `;
+      </div>`;
     return result;
   }
 }

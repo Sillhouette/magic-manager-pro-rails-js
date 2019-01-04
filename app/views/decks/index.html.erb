@@ -11,13 +11,18 @@
         <%@user.decks.each do |deck| %>
           <fieldset>
             <legend><h2><%= deck.name%>
-              <%=button_to "View Details", user_deck_path(@user, deck), method: "get", form: { style: "display:inline-block"}, class:'ui circular button primary' %>
+              <%=button_to "View Details", user_deck_path(@user, deck), method: "get", form: { style: "display:inline-block"}, class:'ui circular button teal' %>
             </h2></legend>
 
-            <p>
-              <%= "Format: #{deck.format}" %> <br/>
-              <%= "Cards: #{deck.deck_cards.count}" %>
-            </p>
+            <div class="ui mini compact blue message ">
+                <strong>Format: </strong> <%= deck.format %>
+            </div>
+
+            <br/>
+
+            <div class="ui mini compact blue message ">
+                <strong>Cards: </strong> <%= deck.deck_cards.count %>
+            </div>
           </fieldset>
 
           <br/>

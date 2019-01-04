@@ -3,6 +3,6 @@
   <%=submit_tag("Add New Deck", class: 'ui circular button primary') %>
 
   <%= label_tag(:format, "Format:", class: 'ui red label horizontal right pointing') %>
-  <%= select_tag(:format, options_for_select(Deck.formats), {:prompt => "Select a Format", :class => 'ui floating dropdown labeled button'})%>
+  <%= select_tag(:format, options_for_select(Deck.formats), {:prompt => "Select a Format", :class => 'ui floating icon dropdown labeled circular button'})%>
 
 <% end %>

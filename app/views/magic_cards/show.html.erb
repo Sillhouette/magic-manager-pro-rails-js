@@ -1,52 +1,245 @@
 <div class="ui container transbox">
   <fieldset>
-    <legend><h2><%= @card.name %></h2></legend>
-
-      <p><%="Layout: #{@card.layout.titlecase}" if @card.layout%></p>
-      <p><%="CMC: #{@card.cmc.titlecase}" if @card.cmc%></p>
-      <p><%="Colors: #{@card.colors.titlecase}" if @card.colors%></p>
-      <p><%="Color Identity: #{ @card.color_identity.titlecase}" if @card.color_identity%></p>
-      <p><%="Type: #{@card.card_type.titlecase}" if @card.card_type%></p>
+    <legend><h2><%= @card.name + " - " + @card.setname %></h2></legend>
 
       <% if @card.image_url %>
-        <img src="<%=@card.image_url%>", style="float:right">
+        <img src="<%=@card.image_url%>", class="ui right floated fixed image card-image">
       <% else %>
-        <%= image_tag("placeholder.jpg", style: "float:right" )%>
+        <%= image_tag("placeholder.jpg", class: "ui right floated image card-image" )%>
       <% end %>
 
-      <p><%="Supertypes: #{@card.supertypes.titlecase}" if @card.supertypes%></p>
-      <p><%="Types: #{@card.types.titlecase}" if @card.types%></p>
-      <p><%="Subtypes: #{@card.subtypes.titlecase}" if @card.subtypes%></p>
-      <p><%="Rarity: #{@card.rarity.titlecase}" if @card.rarity%></p>
-      <p><%="Set Code: #{@card.set_code.upcase}" if @card.set_code%></p>
-      <p><%="Setname: #{@card.setname.titlecase}" if @card.setname%></p>
-      <p><%="Text: #{@card.text}" if @card.text%></p>
-      <p><%="Flavor: #{@card.flavor}" if @card.flavor%></p>
-      <p><%="Artist: #{@card.artist.titlecase}" if @card.artist%></p>
-      <p><%="Number: #{@card.number.titlecase}" if @card.number%></p>
-      <p><%="Power: #{@card.power.titlecase}" if @card.power%></p>
-      <p><%="Toughness: #{@card.toughness.titlecase}" if @card.toughness%></p>
-      <p><%="Loyalty: #{@card.loyalty.titlecase}" if @card.loyalty%></p>
-      <p><%="Multiverse ID: #{@card.multiverse_id.titlecase}" if @card.multiverse_id%></p>
-      <p><%="Other Names: #{@card.other_names.titlecase}" if @card.other_names%></p>
-      <p><%="Mana Cost: #{@card.mana_cost.titlecase}" if @card.mana_cost%></p>
-      <p><%="Variations: #{@card.variations.titlecase}" if @card.variations%></p>
-      <p><%="Image URL: #{@card.image_url}" if @card.image_url%></p>
-      <p><%="Watermark: #{@card.watermark.titlecase}" if @card.watermark%></p>
-      <p><%="Border: #{@card.border.titlecase}" if @card.border%></p>
-      <p><%="Timeshifted: #{@card.timeshifted.titlecase}" if @card.timeshifted%></p>
-      <p><%="Hand: #{@card.hand.titlecase}" if @card.hand%></p>
-      <p><%="Life: #{@card.life.titlecase}" if @card.life%></p>
-      <p><%="Reserved: #{@card.reserved.to_s.titlecase}" if @card.reserved%></p>
-      <p><%="Release Date: #{@card.release_date.titlecase}" if @card.release_date%></p>
-      <p><%="Starter: #{@card.starter.titlecase}" if @card.starter%></p>
-      <p><%="Rulings: #{@card.rulings}" if @card.rulings%></p>
-      <p><%="Original Text: #{@card.original_text}" if @card.original_text%></p>
-      <p><%="Original Type: #{@card.original_type}" if @card.original_type%></p>
-      <p><%="Legalities: #{@card.legalities.titlecase}" if @card.legalities%></p>
-      <p><%="Source: #{@card.source.titlecase}" if @card.source%></p>
+      <div class="ui width">
 
-       <%=link_to button_tag("Back to Index", class: "ui circular button primary"), user_cards_path%>
+        <% if( @card.layout ) %>
+          <div class="ui mini teal message ">
+              <strong>Layout:</strong> <%= @card.layout.titlecase %>
+          </div>
+        <% end %>
 
-  </fieldset>
+        <% if( @card.cmc ) %>
+          <div class="ui mini teal message ">
+              <strong>CMC:</strong> <%= @card.cmc.titlecase %>
+          </div>
+        <% end %>
+
+        <% if( @card.colors ) %>
+          <div class="ui mini teal message ">
+              <strong>Colors:</strong> <%= @card.colors.titlecase %>
+          </div>
+        <% end %>
+
+        <% if( @card.color_identity ) %>
+          <div class="ui mini teal message ">
+              <strong>Color Identity:</strong> <%= @card.color_identity.titlecase %>
+          </div>
+        <% end %>
+
+        <% if( @card.card_type ) %>
+          <div class="ui mini teal message ">
+              <strong>Type:</strong> <%= @card.card_type.titlecase %>
+          </div>
+        <% end %>
+
+        <% if( @card.supertypes ) %>
+          <div class="ui mini teal message ">
+              <strong>Supertypes:</strong> <%= @card.supertypes.titlecase %>
+          </div>
+        <% end %>
+
+        <% if( @card.types ) %>
+          <div class="ui mini teal message ">
+              <strong>Types:</strong> <%= @card.types.titlecase %>
+          </div>
+        <% end %>
+
+        <% if( @card.subtypes ) %>
+          <div class="ui mini teal message ">
+              <strong>Subtypes:</strong> <%= @card.subtypes.titlecase %>
+          </div>
+        <% end %>
+
+        <% if( @card.rarity ) %>
+          <div class="ui mini teal message ">
+              <strong>Rarity:</strong> <%= @card.rarity.titlecase %>
+          </div>
+        <% end %>
+
+        <% if( @card.set_code ) %>
+          <div class="ui mini teal message ">
+              <strong>Set Code:</strong> <%= @card.set_code.upcase %>
+          </div>
+        <% end %>
+
+        <% if( @card.setname ) %>
+          <div class="ui mini teal message ">
+              <strong>Set Name:</strong> <%= @card.setname.titlecase %>
+          </div>
+        <% end %>
+
+        <% if(@card.text) %>
+          <div class="ui mini teal message ">
+              <strong>Text:</strong> <%= @card.text %>
+          </div>
+        <% end %>
+
+        <% if(@card.flavor) %>
+          <div class="ui mini teal message ">
+              <strong>Flavor:</strong> <%= @card.flavor %>
+          </div>
+        <% end %>
+
+        <% if(@card.artist) %>
+          <div class="ui mini teal message ">
+              <strong>Artist:</strong> <%= @card.artist.titlecase %>
+          </div>
+        <% end %>
+
+        <% if(@card.number) %>
+          <div class="ui mini teal message ">
+              <strong>Number:</strong> <%= @card.number %>
+          </div>
+        <% end %>
+
+        <% if(@card.power) %>
+          <div class="ui mini teal message ">
+              <strong>Power:</strong> <%= @card.power %>
+          </div>
+        <% end %>
+
+        <% if(@card.toughness) %>
+          <div class="ui mini teal message ">
+              <strong>Toughness:</strong> <%= @card.toughness %>
+          </div>
+        <% end %>
+
+        <% if(@card.loyalty) %>
+          <div class="ui mini teal message ">
+              <strong>Loyalty:</strong> <%= @card.loyalty.titlecase %>
+          </div>
+        <% end %>
+
+        <% if(@card.multiverse_id) %>
+          <div class="ui mini teal message ">
+              <strong>Multiverse ID:</strong> <%= @card.multiverse_id.titlecase %>
+          </div>
+        <% end %>
+
+        <% if(@card.other_names) %>
+          <div class="ui mini teal message ">
+              <strong>Other Names:</strong> <%= @card.other_names.titlecase %>
+          </div>
+        <% end %>
+
+        <% if(@card.mana_cost) %>
+          <div class="ui mini teal message ">
+              <strong>Mana Cost:</strong> <%= @card.mana_cost.titlecase %>
+          </div>
+        <% end %>
+
+        <% if(@card.variations) %>
+          <div class="ui mini teal message ">
+              <strong>Variations:</strong> <%= @card.variations.titlecase %>
+          </div>
+        <% end %>
+
+        <% if(@card.image_url) %>
+          <div class="ui mini teal message ">
+              <strong>Image URL:</strong> <%= @card.image_url %>
+          </div>
+        <% end %>
+
+        <% if(@card.watermark) %>
+          <div class="ui mini teal message ">
+              <strong>Watermark:</strong> <%= @card.watermark.titlecase %>
+          </div>
+        <% end %>
+
+        <% if(@card.border) %>
+          <div class="ui mini teal message ">
+              <strong>Border:</strong> <%= @card.border.titlecase %>
+          </div>
+        <% end %>
+
+        <% if(@card.timeshifted) %>
+          <div class="ui mini teal message ">
+              <strong>Timeshifted:</strong> <%= @card.timeshifted.titlecase %>
+          </div>
+        <% end %>
+
+        <% if(@card.hand) %>
+          <div class="ui mini teal message ">
+              <strong>Hand:</strong> <%= @card.hand.titlecase %>
+          </div>
+        <% end %>
+
+        <% if(@card.life) %>
+          <div class="ui mini teal message ">
+              <strong>Life:</strong> <%= @card.life.titlecase %>
+          </div>
+        <% end %>
+
+        <% if(@card.reserved) %>
+          <div class="ui mini teal message ">
+              <strong>Reserved:</strong> <%= @card.reserved.to_s.titlecase %>
+          </div>
+        <% end %>
+
+        <% if(@card.release_date) %>
+          <div class="ui mini teal message ">
+              <strong>Release Date:</strong> <%= @card.release_date.titlecase %>
+          </div>
+        <% end %>
+
+        <% if(@card.starter) %>
+          <div class="ui mini teal message ">
+              <strong>Starter:</strong> <%= @card.starter.titlecase %>
+          </div>
+        <% end %>
+
+        <% if(@card.rulings) %>
+        <div class="ui mini teal message ">
+          <div class="header">
+            <strong>Rulings:</strong>
+          </div>
+          <div class="list">
+            <% array = @card.rulings.split("\n").map { |ruling| "<li>" + ruling + "</li>" } %>
+            <%= raw array.join() %>
+          </div>
+        </div>
+        <% end %>
+
+        <% if(@card.original_text) %>
+          <div class="ui mini teal message ">
+              <strong>Original Text:</strong> <%= @card.original_text %>
+          </div>
+        <% end %>
+
+        <% if(@card.original_type) %>
+          <div class="ui mini teal message ">
+              <strong>Original Type:</strong> <%= @card.original_type %>
+          </div>
+        <% end %>
+
+        <% if(@card.legalities) %>
+          <div class="ui mini teal message ">
+            <div class="header">
+              <strong>Legalities:</strong>
+            </div>
+            <div class="list">
+              <% array = @card.legalities.split("\n").map { |legality| "<li>" + legality + "</li>" } %>
+              <%= raw array.join() %>
+            </div>
+          </div>
+        <% end %>
+
+        <% if(@card.source) %>
+          <div class="ui mini teal message ">
+              <strong>Source:</strong> <%= @card.source.titlecase %>
+          </div>
+        <% end %>
+
+         <%=link_to button_tag("Back to Index", class: "ui circular button primary"), user_cards_path%>
+
+    </fieldset>
+  </div>
 </div>
