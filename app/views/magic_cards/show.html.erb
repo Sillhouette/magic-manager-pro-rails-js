@@ -2,11 +2,17 @@
   <fieldset>
     <legend><h2><%= @card.name + " - " + @card.setname %></h2></legend>
 
-      <% if @card.image_url %>
-        <img src="<%=@card.image_url%>", class="ui right floated fixed image card-image">
-      <% else %>
-        <%= image_tag("placeholder.jpg", class: "ui right floated image card-image" )%>
-      <% end %>
+      <div class="ui right floated fixed">
+        <% if @card.image_url %>
+          <img src="<%=@card.image_url%>", class="ui image card-image">
+        <% else %>
+          <%= image_tag("placeholder.jpg", class: "ui image card-image" )%>
+        <% end %>
+
+        <div class="ui mini violet compact message">
+          <h3>Market Price: <%= @card.get_price() %></h3>
+        </div>
+      </div>
 
       <div class="ui width">
 
@@ -162,7 +168,7 @@
 
         <% if(@card.timeshifted) %>
           <div class="ui mini teal message ">
-              <strong>Timeshifted:</strong> <%= @card.timeshifted.titlecase %>
+              <strong>Timeshifted:</strong> <%= @card.timeshifted.to_s.titlecase %>
           </div>
         <% end %>
 
@@ -239,7 +245,6 @@
         <% end %>
 
          <%=link_to button_tag("Back to Index", class: "ui circular button primary"), user_cards_path%>
-
     </fieldset>
   </div>
 </div>

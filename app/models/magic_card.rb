@@ -1,4 +1,5 @@
 require 'open-uri'
+
 class MagicCard < ApplicationRecord
   include Slugable::InstanceMethods
   extend Slugable::ClassMethods
@@ -11,7 +12,15 @@ class MagicCard < ApplicationRecord
   def self.types
     TYPES
   end
-  
+
+  def get_price
+    hash = JSON.parse(open("https://api.scryfall.com/cards/multiverse/#{self.multiverse_id}").string())
+
+    price = hash['usd'] ? ("$" + hash['usd']) : 'Unknown'
+
+    return price
+  end
+
   def self.parse_json
     page_number = 1
     done = false
