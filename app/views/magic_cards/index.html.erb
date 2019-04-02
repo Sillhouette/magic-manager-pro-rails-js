@@ -1,0 +1,47 @@
+<div class="ui container transbox">
+
+  <div id="page-nav-wrapper">
+    <div id="page-nav">
+      <%== pagy_semantic_nav(@pagy) %>
+    </div>
+  </div>
+
+  <% @magic_cards.each do |card| %>
+    <fieldset>
+      <legend><h2><a class="text-color-black" href=<%= magic_card_path(card)%>><%== card.name + " - " + card.get_set_icon(card.set) + card.set_name %></a></h2></legend>
+
+        <div class="ui right floated">
+          <% if card.image_uris["png"] %>
+            <img src="<%=card.image_uris["png"]%>", class="ui image right floated card-image">
+          <% else %>
+            <%= image_tag("placeholder.jpg", class: "ui image right floated card-image" )%>
+          <% end %>
+        </div>
+
+        <div class="ui divided left floated relaxed list width2">
+
+          <%== card.display_attribute(card.mana_cost, "Mana Cost", 'mana_cost') if card.mana_cost != '' %>
+
+          <%== card.display_attribute(card.type_line, "Type") if card.type_line %>
+
+          <%== card.display_attribute(card.set_name.titlecase, "Set Name") if card.set_name%>
+
+          <%== card.display_text_attribute(card.oracle_text, "Text") if card.oracle_text%>
+
+          <%== card.display_attribute(card.power, "Power", 'power') if card.power %>
+
+          <%== card.display_attribute(card.toughness, "Toughness", 'toughness') if card.toughness %>
+
+
+          <br/>
+        </div>
+      </fieldset>
+  <% end %>
+
+  <div id="page-nav-wrapper">
+    <div id="page-nav">
+      <%== pagy_semantic_nav(@pagy) %>
+    </div>
+  </div>
+
+</div>

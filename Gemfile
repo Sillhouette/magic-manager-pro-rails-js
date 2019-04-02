@@ -1,12 +1,12 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.3.3'
+ruby '2.6.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.0'
+gem 'rails', '~> 5.2.2'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+#gem 'sqlite3'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
@@ -27,7 +27,15 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+gem 'tty-spinner'
 gem 'mtg_sdk'
+gem 'pagy'
+gem 'pg'
+gem 'active_record_union'
+gem 'rails_12factor', group: :production
+gem 'jquery-rails'
+
+gem 'semantic-ui-sass'
 
 gem 'omniauth'
 gem 'omniauth-facebook', '~> 4.0'
@@ -51,6 +59,9 @@ group :development, :test do
 end
 
 group :development do
+  gem 'rb-readline'
+  gem 'pry-rescue'
+  gem 'pry-stack_explorer'
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'

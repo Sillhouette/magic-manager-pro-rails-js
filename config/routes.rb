@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     resources :decks
   end
 
-  resources :magic_cards, only: [:show]
+  resources :magic_cards, only: [:show, :index]
 
   resources :user_cards, only: [:new, :index, :edit, :create, :destroy, :update]
 

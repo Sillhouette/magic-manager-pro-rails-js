@@ -2,8 +2,8 @@
 
   <br/>
 
-  <% if MagicCard.find_by(id: @card.magic_card_id) != nil && MagicCard.find_by(id: @card.magic_card_id).image_url %>
-    <img src="<%=MagicCard.find(@card.magic_card_id).image_url%>", class="ui right floated image card-image">
+  <% if MagicCard.find_by(id: @card.magic_card_id) != nil && MagicCard.find_by(id: @card.magic_card_id).png %>
+    <img src="<%=MagicCard.find(@card.magic_card_id).png%>", class="ui right floated image card-image">
   <% else %>
     <% if editing %>
       <%= image_tag("placeholder.jpg", class: "ui right floated image card-image" )%>
@@ -18,7 +18,7 @@
   </div>
 
   <datalist id="card-name">
-    <% MagicCard.pluck(:name, :setname).map do |card| %>
+    <% MagicCard.pluck(:name, :set_name).map do |card| %>
       <option value="<%=card[0] + " - " + card[1] %>"></option>
     <% end %>
   </datalist>

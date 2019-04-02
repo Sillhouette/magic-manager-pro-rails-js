@@ -114,14 +114,16 @@ const Deck = (function() {
 
             </h3></legend>
 
-            <div class="ui blue compact mini message">
-              <strong>Format: </strong>${this.format}
-            </div>
+            <div class="ui divided relaxed list ">
 
-            <br/>
+              <div class="ui item">
+                <h4>Format: ${this.format}</h4>
+              </div>
 
-            <div class="ui blue compact mini message">
-              <strong>Cards: </strong>${this.numCards}
+              <div class="ui item">
+                <h4>Cards: ${this.numCards}</h4>
+              </div>
+
             </div>
 
             <div id='deck_${this.id}_cards' style="display:none">
@@ -180,7 +182,7 @@ class DeckCard {
     this.side_board_quantity = card.side_board_quantity;
     this.main_board_option = card.main_board_option;
     this.side_board_option = card.side_board_option;
-    this.image_url = card.user_card.magic_card.image_url;
+    this.image_url = card.user_card.magic_card.png;
     this.card_url = "/magic_cards/" + card.user_card.magic_card.id;
   }
 
@@ -212,30 +214,40 @@ class DeckCard {
 
           ${image}
 
-          </br>
-
-          <div class="ui blue compact mini message">
-            <strong>Main Board: </strong>${main_board_quantity}
-          </div>
-
           <br/><br/>
 
-          <div class="ui blue compact mini message">
-            <strong>Side Board: </strong>${side_board_quantity}
-          </div>
+          <div class="ui divided left floated relaxed list width2">
 
-          <br/><br/>
+            <div class="ui item">
+              <br/>
+              <strong>Main Board: ${main_board_quantity}</strong>
+              <br/><br/>
+            </div>
 
-          <div class="ui disabled toggle checkbox">
-            <input type="checkbox" disabled="disabled" ${main_board_option}>
-            <label>Main Board Option:</label>
-          </div>
+            <div class="ui item">
+              <br/>
+              <strong>Side Board: ${side_board_quantity}</strong>
+              <br/><br/>
+            </div>
 
-          <br/><br/><br/>
+            <div class="ui item">
+              <br/>
+              <div class="ui disabled toggle checkbox">
+                <input type="checkbox" disabled="disabled" ${main_board_option}>
+                <label>Main Board Option:</label>
+              </div>
+              <br/><br/>
+            </div>
 
-          <div class="ui disabled toggle checkbox">
-            <input type="checkbox" disabled="disabled" ${side_board_option}>
-            <label>Side Board Option:</label>
+            <div class="ui item">
+              <br/>
+              <div class="ui disabled toggle checkbox">
+                <input type="checkbox" disabled="disabled" ${side_board_option}>
+                <label>Side Board Option:</label>
+              </div>
+              <br/><br/>
+            </div>
+
           </div>
         </fieldset>
       </div>

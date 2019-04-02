@@ -13,7 +13,7 @@ class UserCard < ApplicationRecord
 
   def self.find_by_full_name(name)
     full_name = name.split(" - ")
-    magic_card = MagicCard.find_by(name: full_name[0], setname: full_name[1])
+    magic_card = MagicCard.find_by(name: full_name[0], set_name: full_name[1])
     if magic_card
       UserCard.find_by(magic_card_id: magic_card.id)
     end
@@ -26,10 +26,10 @@ class UserCard < ApplicationRecord
 
 
   def magic_card_name
-    self.magic_card.name + " - " + self.magic_card.setname if magic_card
+    self.magic_card.name + " - " + self.magic_card.set_name if magic_card
   end
 
   def magic_card_name=(name)
-    self.magic_card = MagicCard.find_by(name: name.split(" - ")[0], setname: name.split(" - ")[1])
+    self.magic_card = MagicCard.find_by(name: name.split(" - ")[0], set_name: name.split(" - ")[1])
   end
 end

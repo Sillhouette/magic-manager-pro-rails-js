@@ -1,26 +1,26 @@
 
-    <div class="center-container">
-      <div class="center-item">
-        <div class="ui container transbox">
-          <div class="item text-color">
-            <h2><%=@user.name%>: </h2>
+<div class="center-container">
+  <div class="center-item">
+    <div class="ui container transbox">
+      <div class="item text-color">
+        <h2><%=@user.name%>: </h2>
 
-            <h3 class="text-color">Decks: <%= @user.decks.length %></h3>
+        <h3 class="text-color">Decks: <%= @user.decks.length %></h3>
 
-            <div class="ui container" id="deck-toggle-buttons">
-              <button class="ui circular button blue" id="toggle_decks" onclick="getDecks()" data-id="<%= @user.id %>">View Decks</button>
-            </div>
-
-            <div class="ui container" id="user_decks"></div>
-
-            <h3 class="text-color"> Cards: <%= @user.user_cards.length %></h3>
-
-            <div id="card-toggle-buttons">
-              <button class="ui circular button blue" id="toggle_cards" onclick=getCards() data-id="<%= @user.id %>">View Cards</button>
-            </div>
-
-            <div class="ui container" id="user_cards"></div>
-          </div>
+        <div class="ui container" id="deck-toggle-buttons">
+          <button class="ui circular button blue" id="toggle_decks" onclick="getDecks()" data-id="<%= @user.id %>">View Decks</button>
         </div>
+
+        <div class="ui container" id="user_decks"></div>
+
+        <h3 class="text-color"> Cards: <%= @user.user_cards.length %></h3>
+
+        <div id="card-toggle-buttons">
+          <button class="ui circular button blue" id="toggle_cards" onclick=getCards() data-id="<%= @user.id %>">View Cards</button>
+        </div>
+
+        <div class="ui container" id="user_cards"></div>
       </div>
     </div>
+  </div>
+</div>

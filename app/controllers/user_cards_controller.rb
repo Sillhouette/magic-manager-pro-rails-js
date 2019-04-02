@@ -2,11 +2,11 @@ class UserCardsController < ApplicationController
 
   def index
     if params[:card_type] != "" && params[:card_type] != nil
-      @cards = UserCard.filter_by_type(current_user, params[:card_type])
+      @pagy, @cards = pagy(UserCard.filter_by_type(current_user, params[:card_type]).order("id desc"))
       @type = params[:card_type]
       @card = UserCard.new
     else
-      @cards = current_user.user_cards
+      @pagy, @cards = pagy(current_user.user_cards.order("id desc"))
       @card = UserCard.new
       respond_to do |format|
         format.html { render :index }

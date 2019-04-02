@@ -1,7 +1,7 @@
 <%= form_for [@user, @deck] do |deck_builder| %>
 
   <br/>
-  
+
   <div class="ui labeled input">
     <div class="ui olive label">
       Deck Name:
@@ -17,7 +17,7 @@
 
     <div class="ui grey segment">
 
-      <img class="ui right floated image card-image" src=<%= deck_card_builder.object.user_card.magic_card.image_url %>>
+      <img class="ui right floated image card-image" src=<%= deck_card_builder.object.user_card.magic_card.png %>>
 
       <h2><div class="ui checkbox">
         <% card_id = deck_card_builder.object.user_card.id %>

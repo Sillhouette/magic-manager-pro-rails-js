@@ -14,15 +14,18 @@
               <%=button_to "View Details", user_deck_path(@user, deck), method: "get", form: { style: "display:inline-block"}, class:'ui circular button teal' %>
             </h2></legend>
 
-            <div class="ui mini compact blue message ">
-                <strong>Format: </strong> <%= deck.format %>
+            <div class="ui divided relaxed list ">
+
+              <div class="ui item">
+                <h4>Format: <%= deck.format %></h4>
+              </div>
+
+              <div class="ui item">
+                <h4>Cards: <%= deck.deck_cards.count %></h4>
+              </div>
+
             </div>
 
-            <br/>
-
-            <div class="ui mini compact blue message ">
-                <strong>Cards: </strong> <%= deck.deck_cards.count %>
-            </div>
           </fieldset>
 
           <br/>

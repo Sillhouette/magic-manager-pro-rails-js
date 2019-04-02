@@ -1,8 +1,8 @@
 <div class="ui container transbox">
   <fieldset>
     <legend><h2><%=@deck.name.titlecase%>:
-    <%=button_to "Edit", edit_user_deck_path(@user, @deck), method: "get", form: { style: "display:inline-block"}, class:'ui circular button teal' %>
-    <%=button_to "Delete", user_deck_path(@user, @deck), :method => :delete, form: { style: "display:inline-block;"}, class:'ui circular button teal' %>
+      <%=button_to "Edit", edit_user_deck_path(@user, @deck), method: "get", form: { style: "display:inline-block"}, class:'ui circular button teal' %>
+      <%=button_to "Delete", user_deck_path(@user, @deck), :method => :delete, form: { style: "display:inline-block;"}, class:'ui circular button teal' %>
     </h2></legend>
 
       <div class="ui compact olive message">
@@ -12,37 +12,49 @@
       <% @deck.deck_cards.each do |card| %>
         <div class='ui grey segment'>
 
-          <% if MagicCard.find_by(id: UserCard.find(card.user_card_id).magic_card_id).image_url %>
-            <img src="<%=MagicCard.find_by(id: UserCard.find_by(id: card.user_card_id).magic_card_id).image_url%>", class="ui right floated image card-image"/>
-          <% else %>
-            <%= image_tag("placeholder.jpg", class: 'ui right floated image card-image' )%>
-          <% end %>
+          <div class="ui divided left floated relaxed list width2">
 
-          <h3><%= UserCard.find(card.user_card_id).magic_card_name %></h3>
+            <h3><%= UserCard.find(card.user_card_id).magic_card_name %></h3>
 
-          <div class="ui compact teal message">
-            <strong>Main Board: </strong><%= card.main_board_quantity ? card.main_board_quantity : 0 %>
+            <div class="ui item">
+              <br/>
+              <strong>Main Board: <%= card.main_board_quantity ? card.main_board_quantity : 0 %></strong>
+              <br/><br/>
+            </div>
+
+            <div class="ui item">
+              <br/>
+              <strong>Side Board: <%= card.side_board_quantity ? card.side_board_quantity : 0 %></strong>
+              <br/><br/>
+            </div>
+
+            <div class="ui item">
+              <br/>
+              <div class="ui disabled toggle checkbox">
+                <%= check_box_tag ' ', ' ', card.main_board_option, {disabled: true} %>
+                <label>Main Board Option:</label>
+              </div>
+              <br/><br/>
+            </div>
+
+            <div class="ui item">
+              <br/>
+              <div class="ui disabled toggle checkbox">
+                <%= check_box_tag ' ', ' ', card.side_board_option, {disabled: true} %>
+                <label>Side Board Option:</label>
+              </div>
+              <br/><br/>
+            </div>
+
           </div>
 
-          <br/>
-
-          <div class="ui compact teal message">
-            <strong>Side Board: </strong><%= card.side_board_quantity ? card.side_board_quantity : 0 %>
-          </div>
-
-          <br/><br/>
-
-          <div class="ui disabled toggle checkbox">
-            <%= check_box_tag ' ', ' ', card.main_board_option, {disabled: true} %>
-            <label>Main Board Option:</label>
-          </div>
-
-          <br/><br/>
-
-          <div class="ui disabled toggle checkbox">
-            <%= check_box_tag ' ', ' ', card.side_board_option, {disabled: true} %>
-            <label>Side Board Option:</label>
-          </div>
+            <div class="ui right floated">
+              <% if MagicCard.find_by(id: UserCard.find(card.user_card_id).magic_card_id).png %>
+                <img src="<%=MagicCard.find_by(id: UserCard.find_by(id: card.user_card_id).magic_card_id).png%>", class="ui right floated image card-image"/>
+              <% else %>
+                <%= image_tag("placeholder.jpg", class: 'ui right floated image card-image' )%>
+              <% end %>
+            </div>
         </div>
       <% end %>
   </fieldset>

@@ -1,36 +1,44 @@
-<div id="cards-container">
+<div class="ui container" id="cards-container">
   <% @cards.each do |card| %>
     <fieldset>
-      <legend><h3><%= card.magic_card_name%>
+      <legend><h2><%= card.magic_card_name%>
         <% if update_delete_buttons %>
           <%=button_to "View Details", magic_card_path(card.magic_card_id), method: "get", form: { style: "display:inline-block"}, class: "ui circular button teal" %>
           <%=button_to "Edit", edit_user_card_path(card), method: "get", form: { style: "display:inline-block"}, class: 'ui circular button teal' %>
           <%=button_to "Delete", card, :method => :delete, form: { style: "display:inline-block"}, class: 'ui circular button teal' %>
-        <% end %></h3>
+        <% end %></h2>
       </legend>
 
-      <% if MagicCard.find_by(id: card.magic_card_id).image_url %>
-        <img src="<%=MagicCard.find(card.magic_card_id).image_url%>", class="ui right floated image card-image">
-      <% else %>
-        <%= image_tag("placeholder.jpg", class: "ui right floated image card-image" )%>
-      <% end %>
-
-      <br/>
-
-      <div class="ui teal compact message">
-          <strong>Quantity: </strong><%= card.quantity %>
+      <div class="ui right floated">
+        <% if MagicCard.find_by(id: card.magic_card_id).image_uris['png'] %>
+          <img src="<%=MagicCard.find(card.magic_card_id).image_uris['png']%>", class="ui right floated image card-image">
+        <% else %>
+          <%= image_tag("placeholder.jpg", class: "ui right floated image card-image" )%>
+        <% end %>
       </div>
 
-      <br/><br/>
+      <div class="ui divided left floated relaxed list width3">
 
-      <div class="ui teal compact message">
-          <strong>Value(s): </strong><%= card.value %>
-      </div>
+        <div class="ui item">
+          <br/>
 
-      <br/><br/>
+          <h4>Quantity: <%= card.quantity %></h4>
 
-      <div class="ui teal compact message">
-          <strong>Quality: </strong><%= card.quality %>
+          <br/>
+        </div>
+
+        <div class="ui item">
+          <br/>
+            <h4>Value(s): <%= card.value %></h4>
+          <br/>
+        </div>
+
+        <div class="ui item">
+          <br/>
+            <h4>Quality: <%= card.quality %></h4>
+          <br/>
+        </div>
+
       </div>
 
     </fieldset>

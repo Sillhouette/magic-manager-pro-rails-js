@@ -30,5 +30,17 @@
 
       <br/>
 
+      <div id="page-nav-wrapper">
+        <div id="page-nav">
+          <%== pagy_semantic_nav(@pagy) %>
+        </div>
+      </div>
+
       <%= render partial: "user_cards/index_list", locals: {update_delete_buttons: true} %>
+
+      <div id="page-nav-wrapper">
+        <div id="page-nav">
+          <%== pagy_semantic_nav(@pagy) %>
+        </div>
+      </div>
 </div>

@@ -31,7 +31,7 @@ class Card {
     this.name = card.magic_card_name;
     this.user_id = card.user_id;
     this.magic_card_id = card.magic_card_id;
-    this.image_url = card.magic_card.image_url;
+    this.image_url = card.magic_card.png;
     this.quantity = card.quantity;
     this.quality = card.quality;
     this.value = card.value;
@@ -72,22 +72,28 @@ class Card {
 
           ${image}
 
-          <br/><br/>
+          <br/>
 
-          <div class="ui teal compact message">
-            <strong>Quantity: </strong>${this.quantity}
-          </div>
+          <div class="ui divided left floated relaxed list width3">
 
-          </br><br/>
+            <div class="ui item">
+              <br/>
+                <h4>Quantity: ${this.quantity}</h4>
+              <br/>
+            </div>
 
-          <div class="ui teal compact message">
-            <strong>Value(s): </strong>${this.value}
-          </div>
+            <div class="ui item">
+              <br/>
+                <h4>Value(s): ${this.value}</h4>
+              <br/>
+            </div>
 
-          </br><br/>
+            <div class="ui item">
+              <br/>
+                <h4>Quality: ${this.quality}</h4>
+              <br/>
+            </div>
 
-          <div class="ui teal compact message">
-            <strong>Quality: </strong>${this.quality}
           </div>
         </fieldset>
       </div>`;

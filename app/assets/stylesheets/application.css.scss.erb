@@ -13,6 +13,8 @@
  *= require_tree .
  *= require_self
  */
+ @import "semantic-ui";
+
 .landing-image {
   background: url("<%= asset_path 'MTG-background.jpg' %>") no-repeat center center fixed !important;
   -webkit-background-size: cover !important;
@@ -21,20 +23,48 @@
   background-size: cover !important;
 }
 
-.text-color {
+li.margin{
+  margin: 8px 0;
+}
+
+.text-color-black {
   color: black;
+}
+
+#page-nav-wrapper {
+  text-align: center;
+}
+
+#page-nav {
+  display: inline-block;
 }
 
 .transbox {
   padding: 30px;
   margin-bottom: 30px;
-  background-color: rgba(255,255,255,0.80);
+  background-color: rgba(245,255,250,0.80);
   border-radius:8px;
   filter: alpha(opacity=80); /* For IE8 and earlier */
 }
 
+.center-in-div {
+  align: middle;
+}
+
+.black-background {
+  background-color: black !important;
+}
+
 .width {
   width: 775px;
+}
+
+.width2 {
+  width: 715px;
+}
+
+.width3 {
+  width: 750px;
 }
 
 .fixed {
@@ -56,6 +86,8 @@
 
 .card-image {
   border-radius: 5%;
+  height: 310px;
+  width: 223px;
 }
 
 .absolute {
@@ -86,6 +118,15 @@
      left: 0;
      width: 100px;
      height: 100px;
+}
+
+.right-float {
+  float: right;
+  flex:auto;
+}
+
+.trans-background {
+  background-color: rgba(245,255,250,0.35)!important;
 }
 
 .outer-div
@@ -136,8 +177,13 @@
   z-index: 1;
 }
 
+strong {
+  font-size: 16px !important;
+}
+
 fieldset {
     margin: 10px;
+    padding: 15px !important;
     border:2px solid green;
     -moz-border-radius:8px;
     -webkit-border-radius:8px;

@@ -13,13 +13,14 @@ $(document).on("turbolinks:load", function() {
       data: $(this).serialize(),
       success: function(resp) {
         if (resp.includes("error")) {
+          debugger;
           $("#card_submit").prop("disabled", false);
           $("#error-container").html(resp);
         } else {
           $("#new_user_card")[0].reset();
           $("#error-container").html("");
           $("#card_submit").prop("disabled", false);
-          $("#cards-container").append(resp);
+          $("#cards-container").prepend(resp);
         }
       }
     });

@@ -6,41 +6,35 @@
     </h3>
   </legend>
 
-  <% if MagicCard.find_by(id: @card.magic_card_id).image_url %>
-    <img src="<%=MagicCard.find(@card.magic_card_id).image_url%>", style="float:right">
-  <% else %>
-    <%= image_tag("placeholder.jpg", style: "float:right" )%>
-  <% end %>
+  <div class="ui right floated">
+    <% if MagicCard.find_by(id: @card.magic_card_id).image_uris['png'] %>
+      <img src="<%=MagicCard.find(@card.magic_card_id).image_uris['png']%>", class="ui right floated image card-image">
+    <% else %>
+      <%= image_tag("placeholder.jpg", class: "ui right floated image card-image" )%>
+    <% end %>
+  </div>
 
-    <br/><br/>
+  <div class="ui divided left floated relaxed list width3">
 
-    <div class="ui labeled input">
-      <div class="ui label">
-        Quantity:
-      </div>
-        <textarea disabled="disabled"><%= @card.quantity %></textarea>
+    <div class="ui item">
+      <br/>
+
+      <h4>Quantity: <%= @card.quantity %></h4>
+
+      <br/>
     </div>
 
-    <br/><br/><br/><br/>
+    <div class="ui item">
+      <br/>
+        <h4>Value(s): <%= @card.value %></h4>
+      <br/>
+    </div>
 
-    <%= form_for @card do |f| %>
+    <div class="ui item">
+      <br/>
+        <h4>Quality: <%= @card.quality %></h4>
+      <br/>
+    </div>
 
-      <div class="ui labeled input">
-        <div class="ui label">
-          Value(s):
-        </div>
-          <%= f.text_area :value, :disabled => true %>
-      </div>
-
-      <br/><br/><br/><br/>
-
-      <div class="ui labeled input">
-        <div class="ui label">
-          Quality:
-        </div>
-        <%= f.text_area :quality, :disabled => true %>
-      </div>
-
-    <% end %>
-
+  </div>
 </fieldset>
