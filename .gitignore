@@ -28,7 +28,7 @@
 .env
 
 #ignore bulk data files
-/assets/javascripts/bulk_data/*
+/app/assets/javascripts/bulk_data/*
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
