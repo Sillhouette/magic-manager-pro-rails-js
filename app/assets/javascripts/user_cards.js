@@ -1,8 +1,8 @@
-function getCards() {
+function getCards(user_id) {
   let cardToggleButton = document.getElementById("toggle_cards");
   if ($("#user_cards").html() === "") {
     cardToggleButton.innerText = "Hide Cards";
-    let id = $(this).data("id");
+    let id = user_id;
 
     $.get("/users/" + id + "/user_cards.json", function(data) {
       let complete = ``;

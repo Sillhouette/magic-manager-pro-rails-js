@@ -16,7 +16,7 @@
         <h3 class="text-color"> Cards: <%= @user.user_cards.length %></h3>
 
         <div id="card-toggle-buttons">
-          <button class="ui circular button blue" id="toggle_cards" onclick=getCards() data-id="<%= @user.id %>">View Cards</button>
+          <button class="ui circular button blue" id="toggle_cards" onclick=getCards("<%= @user.id %>") data-id="<%= @user.id %>">View Cards</button>
         </div>
 
         <div class="ui container" id="user_cards"></div>
