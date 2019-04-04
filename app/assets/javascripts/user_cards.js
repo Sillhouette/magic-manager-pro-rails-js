@@ -31,7 +31,7 @@ class Card {
     this.name = card.magic_card_name;
     this.user_id = card.user_id;
     this.magic_card_id = card.magic_card_id;
-    this.image_url = card.magic_card.png;
+    this.image_url = card.magic_card.image_uris["png"];
     this.quantity = card.quantity;
     this.quality = card.quality;
     this.value = card.value;

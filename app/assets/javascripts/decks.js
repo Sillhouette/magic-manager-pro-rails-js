@@ -182,7 +182,7 @@ class DeckCard {
     this.side_board_quantity = card.side_board_quantity;
     this.main_board_option = card.main_board_option;
     this.side_board_option = card.side_board_option;
-    this.image_url = card.user_card.magic_card.png;
+    this.image_url = card.user_card.magic_card.image_uris["png"];
     this.card_url = "/magic_cards/" + card.user_card.magic_card.id;
   }
 
