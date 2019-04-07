@@ -10,12 +10,12 @@ class Deck < ApplicationRecord
 
   validates :name, presence: true
 
-  FORMATS = [ "Amonkhet Block", "Battle for Zendikar Block", "Classic", "Commander", "Extended", "Freeform", "Ice Age Block", "Innistrad Block",
-     "Invasion Block", "Kaladesh Block", "Kamigawa Block", "Khans of Tarkir Block", "Legacy", "Lorwyn-Shadowmoor Block", "Masques Block",
-     "Mirage Block", "Mirrodin Block", "Modern", "Odyssey Block", "Onslaught Block", "Prismatic", "Ravnica Block", "Return to Ravnica Block",
-     "Scars of Mirrodin Block", "Shadows over Innistrad Block", "Shards of Alara Block", "Singleton 100", "Standard", "Tempest Block", "Theros Block",
-     "Time Spiral Block", "Tribal Wars Legacy", "Un-Sets", "Urza Block", "Vintage", "Zendikar Block" ]
-
+  FORMATS = [ "Classic", "Commander", "Extended", "Legacy", "Standard", "Vintage" ]
+# "Amonkhet Block", "Battle for Zendikar Block",  "Freeform", "Ice Age Block", "Innistrad Block",
+#    "Invasion Block", "Kaladesh Block", "Kamigawa Block", "Khans of Tarkir Block",  "Lorwyn-Shadowmoor Block", "Masques Block",
+#    "Mirage Block", "Mirrodin Block", "Modern", "Odyssey Block", "Onslaught Block", "Prismatic", "Ravnica Block", "Return to Ravnica Block",
+#    "Scars of Mirrodin Block", "Shadows over Innistrad Block", "Shards of Alara Block", "Singleton 100", "Tempest Block", "Theros Block",
+#    "Time Spiral Block", "Tribal Wars Legacy", "Un-Sets", "Urza Block", "Zendikar Block"
   def self.formats
     FORMATS
   end
