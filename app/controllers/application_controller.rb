@@ -11,10 +11,11 @@ class ApplicationController < ActionController::Base
   def logged_in?
     current_user.id != nil
   end
+
   def require_logged_in
     return redirect_to(controller: 'sessions', action: 'new') unless logged_in?
   end
 
-  helper_method :current_user, :logged_in?
+  helper_method :current_user, :logged_in?, :require_logged_in
 
 end
