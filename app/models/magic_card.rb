@@ -448,7 +448,7 @@ class MagicCard < ApplicationRecord
     default_cards_url = default_cards_data['permalink_uri']
     default_cards_data = File.read(open(default_cards_url))
 
-    File.open("app/assets/javascripts/bulk_data/scryfall-default-cards.json", "w") do |f|
+    File.open("public/bulk_data/scryfall-default-cards.json", "w") do |f|
         f.write(default_cards_data)
     end
   end
@@ -456,7 +456,7 @@ class MagicCard < ApplicationRecord
   def self.fetch_new_mtgjson_data
     all_cards_data = File.read(open("https://mtgjson.com/json/AllCards.json"))
 
-    File.open("app/assets/javascripts/bulk_data/AllCards.json", "w") do |f|
+    File.open("public/bulk_data/bulk_data/AllCards.json", "w") do |f|
         f.write(all_cards_data)
     end
   end
@@ -467,12 +467,12 @@ class MagicCard < ApplicationRecord
   end
 
   def self.read_file
-    file = File.read("app/assets/javascripts/bulk_data/AllCards.json")
+    file = File.read("public/bulk_data/AllCards.json")
     $additional_card_data = JSON.parse(file)
   end
 
   def self.fetch_cards
-    file = File.read("app/assets/javascripts/bulk_data/scryfall-default-cards.json")
+    file = File.read("public/bulk_data/scryfall-default-cards.json")
     cards = JSON.parse(file)
     full_cards = []
 
