@@ -461,7 +461,7 @@ class MagicCard < ApplicationRecord
     end
   end
 
-  def fetch_new_bulk_data
+  def self.fetch_new_bulk_data
     self.fetch_new_scryfall_data
     self.fetch_new_mtgjson_data
   end
