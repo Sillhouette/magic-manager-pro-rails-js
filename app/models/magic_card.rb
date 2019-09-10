@@ -447,7 +447,7 @@ class MagicCard < ApplicationRecord
     default_cards_data = bulk_data_hash['data'][1]
     default_cards_url = default_cards_data['permalink_uri']
     default_cards_data = File.read(open(default_cards_url))
-
+    cards = JSON.parse(default_cards_data)
     # File.open("public/bulk_data/scryfall-default-cards.json", "w") do |f|
     #     f.write(default_cards_data)
     # end
@@ -455,7 +455,8 @@ class MagicCard < ApplicationRecord
 
   def self.fetch_new_mtgjson_data
     all_cards_data = File.read(open("https://mtgjson.com/json/AllCards.json"))
-
+    cards = JSON.parse(all_cards_data)
+    #cards = JSON.parse(all_cards_data)
     # File.open("public/bulk_data/bulk_data/AllCards.json", "w") do |f|
     #     f.write(all_cards_data)
     # end
@@ -465,21 +466,22 @@ class MagicCard < ApplicationRecord
     [ self.fetch_new_scryfall_data, self.fetch_new_mtgjson_data ]
   end
 
-  def self.read_file(data_file)
-    file = File.read(data_file)
-    $additional_card_data = JSON.parse(file)
-  end
+  # def self.read_file(data_file)
+  #   file = File.read(data_file)
+  #   $additional_card_data = JSON.parse(file)
+  # end
 
   def self.load_database
     fetch_cards(self.fetch_new_bulk_data)
   end
-  
+
   def self.fetch_cards(data_array)
-    file = File.read(data_array[0])
-    cards = JSON.parse(file)
+    #binding.pry
+    #file = File.read(data_array[0])
+    #cards = JSON.parse(file)
     full_cards = []
 
-    cards.each_with_index do |card, index|
+    data_array[0].each_with_index do |card, index|
       unless self.find_by(scryfall_id: card["id"])
         card_info = {}
         card_info["arena_id"] = card["arena_id"] if card["arena_id"]
@@ -575,7 +577,7 @@ class MagicCard < ApplicationRecord
 
   def self.fetch_additional_data(scryfall_id, data_file)
     if !$additional_card_data
-      self.read_file(data_file)
+      $additional_card_data = data_file
     end
 
     card_info = {}
