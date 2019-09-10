@@ -448,31 +448,34 @@ class MagicCard < ApplicationRecord
     default_cards_url = default_cards_data['permalink_uri']
     default_cards_data = File.read(open(default_cards_url))
 
-    File.open("public/bulk_data/scryfall-default-cards.json", "w") do |f|
-        f.write(default_cards_data)
-    end
+    # File.open("public/bulk_data/scryfall-default-cards.json", "w") do |f|
+    #     f.write(default_cards_data)
+    # end
   end
 
   def self.fetch_new_mtgjson_data
     all_cards_data = File.read(open("https://mtgjson.com/json/AllCards.json"))
 
-    File.open("public/bulk_data/bulk_data/AllCards.json", "w") do |f|
-        f.write(all_cards_data)
-    end
+    # File.open("public/bulk_data/bulk_data/AllCards.json", "w") do |f|
+    #     f.write(all_cards_data)
+    # end
   end
 
   def self.fetch_new_bulk_data
-    self.fetch_new_scryfall_data
-    self.fetch_new_mtgjson_data
+    [ self.fetch_new_scryfall_data, self.fetch_new_mtgjson_data ]
   end
 
-  def self.read_file
-    file = File.read("public/bulk_data/AllCards.json")
+  def self.read_file(data_file)
+    file = File.read(data_file)
     $additional_card_data = JSON.parse(file)
   end
 
-  def self.fetch_cards
-    file = File.read("public/bulk_data/scryfall-default-cards.json")
+  def self.load_database
+    fetch_cards(self.fetch_new_bulk_data)
+  end
+  
+  def self.fetch_cards(data_array)
+    file = File.read(data_array[0])
     cards = JSON.parse(file)
     full_cards = []
 
@@ -544,7 +547,7 @@ class MagicCard < ApplicationRecord
         all_parts_data = card["all_parts"] if card["all_parts"]
         card_faces_data = card["card_faces"] if card["card_faces"]
 
-        additional_attributes = self.fetch_additional_data(card_info["scryfall_id"])
+        additional_attributes = self.fetch_additional_data(card_info["scryfall_id"], data_array[1])
         full_card = card_info.merge(additional_attributes)
 
         if !self.find_by("scryfall_id": full_card['scryfall_id'])
@@ -570,9 +573,9 @@ class MagicCard < ApplicationRecord
     $additional_card_data = nil
   end
 
-  def self.fetch_additional_data(scryfall_id)
+  def self.fetch_additional_data(scryfall_id, data_file)
     if !$additional_card_data
-      self.read_file
+      self.read_file(data_file)
     end
 
     card_info = {}
