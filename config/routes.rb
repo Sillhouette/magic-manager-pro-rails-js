@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :users, except: [:index] do
-    resources :user_cards, only: [:index] #:new, #removed new as it is not handled on the index page via JS
+  resources :users do
+    resources :user_cards, only: [:index] #:new, #removed new as it is now handled on the index page via JS
     resources :decks
   end
 
