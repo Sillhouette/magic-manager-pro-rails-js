@@ -433,7 +433,7 @@ class MagicCard < ApplicationRecord
     if page.class == StringIO
       page = page.string()
       hash = JSON.parse(page)
-      price = hash['usd'] ? ("$" + hash['usd']) : 'Unknown'
+      price = hash['prices']['usd'] ? ("$" + hash['prices']['usd']) : 'Unknown'
     else
       price = 'Unknown'
     end
