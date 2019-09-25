@@ -9,7 +9,7 @@ class MagicCardsController < ApplicationController
 
   def index
     @cards = []
-    MagicCard.where.not(multiverse_ids: []).order(Arel.sql("CAST(multiverse_ids[1] AS INT)")).find_in_batches do |batch|
+    MagicCard.where.not(multiverse_ids: []).order(Arel.sql("CAST(multiverse_ids[1] AS INT)")).find_in_batches(batch_size: 5000) do |batch|
       @cards += batch
     end
     # MagicCard.where(multiverse_ids: [])
