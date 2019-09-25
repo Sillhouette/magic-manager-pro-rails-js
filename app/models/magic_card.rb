@@ -444,7 +444,7 @@ class MagicCard < ApplicationRecord
   def self.fetch_new_scryfall_data
     bulk_data = open("https://api.scryfall.com/bulk-data").read()
     bulk_data_hash = JSON.parse(bulk_data)
-    default_cards_data = bulk_data_hash['data'][0]
+    default_cards_data = bulk_data_hash['data'][1]
     default_cards_url = default_cards_data['permalink_uri']
     default_cards_data = File.read(open(default_cards_url))
     cards = JSON.parse(default_cards_data)
