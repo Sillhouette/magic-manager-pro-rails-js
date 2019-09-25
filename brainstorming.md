@@ -63,15 +63,6 @@ basic lands and quantities are located on this page: island, swamp, plains, fore
 totals all mainboard cards (min 60)
 totals all sideboard options (max 15)
 
-
-
-
-
-
-
-
-
-
 Set
 has many magic_cards
 
