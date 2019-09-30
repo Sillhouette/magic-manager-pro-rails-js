@@ -19,7 +19,7 @@ class MagicCardsController < ApplicationController
       :oracle_text,
       :power,
       :toughness
-    ).where.not(multiverse_ids: []).order(Arel.sql("CAST(multiverse_ids[1] AS INT)")), MagicCard.select(
+    ).where.not(multiverse_ids: []).order(Arel.sql("CAST(multiverse_ids[1] AS INT)")) + MagicCard.select(
       :id,
       :image_uris,
       :name,
