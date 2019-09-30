@@ -8,8 +8,7 @@ class MagicCardsController < ApplicationController
   end
 
   def index
-    @cards = []
-    MagicCard.select(
+    @cards = [ MagicCard.select(
       :id,
       :image_uris,
       :name,
@@ -20,10 +19,7 @@ class MagicCardsController < ApplicationController
       :oracle_text,
       :power,
       :toughness
-    ).where.not(multiverse_ids: []).order(Arel.sql("CAST(multiverse_ids[1] AS INT)")).find_in_batches(batch_size: 5000) do |batch|
-      @cards += batch
-    end
-    # MagicCard.where(multiverse_ids: [])
+    ).where.not(multiverse_ids: []).order(Arel.sql("CAST(multiverse_ids[1] AS INT)")), MagicCard.where(multiverse_ids: [])]
     @pagy, @magic_cards = pagy_array(@cards, items: 10)
     respond_to do |format|
       format.html { render :index }
