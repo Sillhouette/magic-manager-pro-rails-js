@@ -19,7 +19,18 @@ class MagicCardsController < ApplicationController
       :oracle_text,
       :power,
       :toughness
-    ).where.not(multiverse_ids: []).order(Arel.sql("CAST(multiverse_ids[1] AS INT)")), MagicCard.where(multiverse_ids: [])]
+    ).where.not(multiverse_ids: []).order(Arel.sql("CAST(multiverse_ids[1] AS INT)")), MagicCardMagicCard.select(
+      :id,
+      :image_uris,
+      :name,
+      :set,
+      :set_name,
+      :mana_cost,
+      :type_line,
+      :oracle_text,
+      :power,
+      :toughness
+    ).where(multiverse_ids: [])]
     @pagy, @magic_cards = pagy_array(@cards, items: 10)
     respond_to do |format|
       format.html { render :index }
