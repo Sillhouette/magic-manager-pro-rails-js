@@ -182,14 +182,12 @@ class DeckCard {
     this.side_board_quantity = card.side_board_quantity;
     this.main_board_option = card.main_board_option;
     this.side_board_option = card.side_board_option;
-    this.image_url = card.user_card.magic_card.image_uris["png"];
+    this.image_url = card.user_card.magic_card.image_uris["normal"];
     this.card_url = "/magic_cards/" + card.user_card.magic_card.id;
   }
 
   html() {
-    let image = `<img src="${
-      this.image_url
-    }" class="ui right floated image card-image"`;
+    let image = `<img src="${this.image_url}" class="ui right floated image card-image"`;
     if (!this.image_url) {
       image = `<img class="ui right floated image card-image" src="/assets/placeholder-366d968b285bfb25d2067a60fa8805c3f685c3085c0d2288504f9b279b0f8c69.jpg">`;
     }

@@ -11,13 +11,13 @@
       <legend><h2><a class="text-color-black" href=<%= magic_card_path(card)%>><%== card.name + " - " + card.get_set_icon(card.set) + card.set_name %></a></h2></legend>
 
         <div class="ui right floated">
-          <% if card.image_uris["png"] %>
-            <img src="<%=card.image_uris["png"]%>", class="ui image right floated card-image">
+          <% if card.image_uris["normal"] %>
+            <img src="<%=card.image_uris["normal"]%>", class="ui image right floated card-image">
           <% else %>
             <%= image_tag("placeholder.jpg", class: "ui image right floated card-image" )%>
           <% end %>
         </div>
-        
+
         <div class="ui divided left floated relaxed list width2">
 
           <%== card.display_attribute(card.mana_cost, "Mana Cost", 'mana_cost') if card.mana_cost != '' %>

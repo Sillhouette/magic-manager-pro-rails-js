@@ -31,16 +31,14 @@ class Card {
     this.name = card.magic_card_name;
     this.user_id = card.user_id;
     this.magic_card_id = card.magic_card_id;
-    this.image_url = card.magic_card.image_uris["png"];
+    this.image_url = card.magic_card.image_uris["normal"];
     this.quantity = card.quantity;
     this.quality = card.quality;
     this.value = card.value;
   }
 
   html() {
-    let image = `<img src="${
-      this.image_url
-    }" class="ui right floated image card-image"`;
+    let image = `<img src="${this.image_url}" class="ui right floated image card-image"`;
     if (!this.image_url) {
       image = `<img class="ui right floated image card-image" src="/assets/placeholder-366d968b285bfb25d2067a60fa8805c3f685c3085c0d2288504f9b279b0f8c69.jpg">`;
     }
@@ -50,21 +48,15 @@ class Card {
         <fieldset>
           <legend><h3> ${this.name}
 
-          <form method='Get' action='/magic_cards/${
-            this.magic_card_id
-          }' form={ style="display:inline-block"}>
+          <form method='Get' action='/magic_cards/${this.magic_card_id}' form={ style="display:inline-block"}>
              <input class="ui circular tiny button teal" value='View Details' type='submit' />
            </form>
 
-          <form method='Update' action='/user_cards/${
-            this.id
-          }/edit' form={ style="display:inline-block"}>
+          <form method='Update' action='/user_cards/${this.id}/edit' form={ style="display:inline-block"}>
              <input class="ui circular tiny button teal" value='Edit' type='submit' />
            </form>
 
-          <form method='post' action='/user_cards/${
-            this.id
-          }' data-remote='true' form={ style="display:inline-block"}>
+          <form method='post' action='/user_cards/${this.id}' data-remote='true' form={ style="display:inline-block"}>
              <input name='_method' value='delete' type='hidden' />
              <input class="ui circular tiny button teal" value='Delete' type='submit' />
            </form>
