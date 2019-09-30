@@ -8,7 +8,7 @@ class MagicCardsController < ApplicationController
   end
 
   def index
-    @cards = [ MagicCard.select(
+    @cards = MagicCard.select(
       :id,
       :image_uris,
       :name,
@@ -30,7 +30,7 @@ class MagicCardsController < ApplicationController
       :oracle_text,
       :power,
       :toughness
-    ).where(multiverse_ids: [])]
+    ).where(multiverse_ids: [])
     @pagy, @magic_cards = pagy_array(@cards, items: 10)
     respond_to do |format|
       format.html { render :index }
