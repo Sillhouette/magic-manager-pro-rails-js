@@ -39,7 +39,9 @@ class MagicCardsController < ApplicationController
     # end
     # @pagy, @magic_cards = pagy_array(@cards, items: 10)
     name = params["magic_card_name"].split(" - ") if params["magic_card_name"]
+    puts "pre #{name}"
     name = name.class == Array ? name.split(" - ")[0] : name
+    puts "Post #{name}"
     if name
       @pagy, @magic_cards = pagy(MagicCard.where('lower(name) LIKE ?', "%#{name}%"), items: 10)
     else
