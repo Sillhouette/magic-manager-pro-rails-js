@@ -10,9 +10,8 @@ class MagicCardsController < ApplicationController
   def index
     name = params["magic_card_name"]
     name = name.class == Array ? name.split(" - ")[0] : name
-    puts name
     if name
-      @cards = MagicCard.where('name LIKE ?', "%#{name}%")
+      @cards = MagicCard.where('lower(name) LIKE ?', "%#{name}%")
     else
       @cards = MagicCard.select(
         :id,
