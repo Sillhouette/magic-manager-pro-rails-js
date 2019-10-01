@@ -54,20 +54,21 @@ class MagicCardsController < ApplicationController
         :oracle_text,
         :power,
         :toughness
-      ).where.not(multiverse_ids: []).order(Arel.sql("CAST(multiverse_ids[1] AS INT)")).merge(MagicCard.select(
-        :id,
-        :image_uris,
-        :name,
-        :set,
-        :set_name,
-        :mana_cost,
-        :type_line,
-        :oracle_text,
-        :power,
-        :toughness
-      ).where(multiverse_ids: [])), items: 10)
+      ).order(Arel.sql("CAST(multiverse_ids[1] AS INT) NULLS LAST")), items: 10)
+      # .merge(MagicCard.select(
+      #   :id,
+      #   :image_uris,
+      #   :name,
+      #   :set,
+      #   :set_name,
+      #   :mana_cost,
+      #   :type_line,
+      #   :oracle_text,
+      #   :power,
+      #   :toughness
+      # ).where(multiverse_ids: []))
     end
-
+#.where.not(multiverse_ids: [])
     respond_to do |format|
       format.html { render :index }
       #format.json { render json: MagicCard.all, include: '*.*'}
