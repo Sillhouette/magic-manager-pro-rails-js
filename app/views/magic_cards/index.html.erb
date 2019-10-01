@@ -1,8 +1,8 @@
 <div class="ui container transbox">
 
   <%= form_tag magic_cards_path, method: :post do %>
-    <datalist id="card-name">
-      <% MagicCard.pluck(:name, :set_name).map do |card| %>
+    <datalist>
+      <%= MagicCard.pluck(:name, :set_name).map do |card| %>
         <option value="<%=card[0] + " - " + card[1] %>"></option>
       <% end %>
     </datalist>
