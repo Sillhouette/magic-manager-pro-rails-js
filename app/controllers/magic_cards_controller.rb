@@ -38,7 +38,7 @@ class MagicCardsController < ApplicationController
     #   ).where(multiverse_ids: [])
     # end
     # @pagy, @magic_cards = pagy_array(@cards, items: 10)
-    name = params["magic_card_name"]
+    name = params["magic_card_name"].split(" - ")
     name = name.class == Array ? name.split(" - ")[0] : name
     if name
       @pagy, @magic_cards = pagy(MagicCard.where('lower(name) LIKE ?', "%#{name}%"), items: 10)
