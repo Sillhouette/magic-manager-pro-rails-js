@@ -43,7 +43,7 @@ class MagicCardsController < ApplicationController
     if name
       @pagy, @magic_cards = pagy(MagicCard.where('lower(name) LIKE ?', "%#{name}%"), items: 10)
     else
-      @pagy, @magic_cards = pagy(MagicCard.select(
+      @pagy, @magic_cards = pagy_array(MagicCard.select(
         :id,
         :image_uris,
         :name,
