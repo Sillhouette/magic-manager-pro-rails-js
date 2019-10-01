@@ -35,7 +35,7 @@ class MagicCardsController < ApplicationController
           # paginate as usual with any pagy_* backend constructor
           @pagy, @records = pagy(MagicCard.all, items: 20)
           # explicitly merge the headers to the response
-          pagy_headers_merge(pagy)
+          pagy_headers_merge(@pagy)
           render json: @records, include: '*.*'
        }
     end
