@@ -8,7 +8,8 @@ class MagicCardsController < ApplicationController
   end
 
   def index
-    if name = params["magic_card_name"]
+    name = params["magic_card_name"]
+    if name.class == Array ? name[0] : name
       @cards = MagicCard.where('name LIKE ?', "%#{name.split(" - ")[0]}%")
     else
       @cards = MagicCard.select(
