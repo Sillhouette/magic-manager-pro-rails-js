@@ -43,7 +43,7 @@ class MagicCardsController < ApplicationController
     if name
       @pagy, @magic_cards = pagy(MagicCard.where('lower(name) LIKE ?', "%#{name}%"), items: 10)
     else
-      @pagy, @magic_cards = pagy_array(MagicCard.select(
+      @pagy, @magic_cards = pagy(MagicCard.select(
         :id,
         :image_uris,
         :name,
@@ -54,7 +54,7 @@ class MagicCardsController < ApplicationController
         :oracle_text,
         :power,
         :toughness
-      ).where.not(multiverse_ids: []).order(Arel.sql("CAST(multiverse_ids[1] AS INT)")) + MagicCard.select(
+      ).where.not(multiverse_ids: []).order(Arel.sql("CAST(multiverse_ids[1] AS INT)")).merge(MagicCard.select(
         :id,
         :image_uris,
         :name,
@@ -65,7 +65,7 @@ class MagicCardsController < ApplicationController
         :oracle_text,
         :power,
         :toughness
-      ).where(multiverse_ids: []), items: 10)
+      ).where(multiverse_ids: [])), items: 10)
     end
 
     respond_to do |format|
