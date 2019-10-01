@@ -9,6 +9,8 @@ class MagicCardsController < ApplicationController
 
   def index
     name = params["magic_card_name"]
+    puts name
+    puts name.class
     if name.class == Array ? name[0] : name
       @cards = MagicCard.where('name LIKE ?', "%#{name.split(" - ")[0]}%")
     else
