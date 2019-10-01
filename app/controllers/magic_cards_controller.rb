@@ -9,7 +9,7 @@ class MagicCardsController < ApplicationController
 
   def index
     puts params
-    @cards = MagicCard.pluck(
+    @cards = MagicCard.select(
       :id,
       :image_uris,
       :name,
@@ -20,7 +20,7 @@ class MagicCardsController < ApplicationController
       :oracle_text,
       :power,
       :toughness
-    ).where.not(multiverse_ids: []).order(Arel.sql("CAST(multiverse_ids[1] AS INT)")) + MagicCard.pluck(
+    ).where.not(multiverse_ids: []).order(Arel.sql("CAST(multiverse_ids[1] AS INT)")) + MagicCard.select(
       :id,
       :image_uris,
       :name,
