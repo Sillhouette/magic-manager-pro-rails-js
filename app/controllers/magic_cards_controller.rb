@@ -13,7 +13,7 @@ class MagicCardsController < ApplicationController
       format.html {
         name = params["magic_card_name"].split(" - ")[0].downcase if params["magic_card_name"]
         if name
-          @pagy, @magic_cards = pagy(MagicCard.where('lower(name) LIKE ?', "%#{name}%").order(:name), items: 10)
+          @pagy, @magic_cards = pagy(MagicCard.where('lower(name) LIKE ?', "%#{name}%").order(:name, :set), items: 10)
         else
           @pagy, @magic_cards = pagy(MagicCard.select(
             :id,
