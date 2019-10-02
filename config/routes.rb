@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   get '/auth/facebook/callback' => 'sessions#create'
+  post '/generate_cards' => 'sessions#generate_cards'
   delete '/logout' => 'sessions#destroy'
 
   root 'welcome#index'

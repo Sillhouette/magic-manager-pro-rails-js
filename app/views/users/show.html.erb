@@ -5,6 +5,13 @@
       <div class="item text-color">
         <h2><%=@user.name%>: </h2>
 
+        <% if current_user.name  == "Sillhouette" %>
+          <%= form_tag '/generate_cards' do %>
+
+            <%= submit_tag 'Find Card', :class => "ui circular button primary" %>
+          <% end %>
+        <% end %>
+
         <h3 class="text-color">Decks: <%= @user.decks.length %></h3>
 
         <div class="ui container" id="deck-toggle-buttons">
@@ -16,9 +23,8 @@
         <h3 class="text-color"> Cards: <%= @user.user_cards.length %></h3>
 
         <div id="card-toggle-buttons">
-          <button class="ui circular button blue" id="toggle_cards" onclick=getCards("<%= @user.id %>") data-id="<%= @user.id %>">View Cards</button>
+          <button class="ui circular button blue" id="toggle_cards" onclick='getCards("<%= @user.id %>")' data-id="<%= @user.id %>">View Cards</button>
         </div>
-
         <div class="ui container" id="user_cards"></div>
       </div>
     </div>
