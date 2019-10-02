@@ -26,3 +26,4 @@
 # user1.user_cards.create(magic_card_id: MagicCard.find(23).id, quantity: 10, quality: "lightly played", value: "$400")
 # user1.user_cards.create(magic_card_id: MagicCard.find(24).id, quantity: 10, quality: "lightly played", value: "$400")
 # user1.user_cards.create(magic_card_id: MagicCard.find(25).id, quantity: 10, quality: "lightly played", value: "$400")
+MagicCard.load_database
