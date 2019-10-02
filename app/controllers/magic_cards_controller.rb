@@ -7,12 +7,6 @@ class MagicCardsController < ApplicationController
     end
   end
 
-  def generate_cards
-    if current_user.name == "Sillhouette"
-      MagicCard.load_database
-    end
-  end
-
   def index
 
     respond_to do |format|

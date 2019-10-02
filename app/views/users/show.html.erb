@@ -5,13 +5,6 @@
       <div class="item text-color">
         <h2><%=@user.name%>: </h2>
 
-        <% if current_user.name  == "Sillhouette" %>
-          <%= form_tag '/generate_cards' do %>
-
-            <%= submit_tag 'Generate Cards', :class => "ui circular button primary" %>
-          <% end %>
-        <% end %>
-
         <h3 class="text-color">Decks: <%= @user.decks.length %></h3>
 
         <div class="ui container" id="deck-toggle-buttons">
