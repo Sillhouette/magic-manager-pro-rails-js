@@ -318,7 +318,7 @@ DEPENDENCIES
   omniauth
   omniauth-facebook (~> 4.0)
   pagy
-  passenger
+  passenger (>= 5.0.25)
   pg
   pry-rails
   pry-rescue
