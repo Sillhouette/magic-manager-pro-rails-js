@@ -174,6 +174,9 @@ GEM
       oauth2 (~> 1.1)
       omniauth (~> 1.9)
     pagy (3.5.1)
+    passenger (6.0.4)
+      rack
+      rake (>= 0.8.1)
     pg (1.1.4)
     pry (0.12.2)
       coderay (~> 1.1.0)
@@ -315,6 +318,7 @@ DEPENDENCIES
   omniauth
   omniauth-facebook (~> 4.0)
   pagy
+  passenger
   pg
   pry-rails
   pry-rescue
