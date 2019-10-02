@@ -1,0 +1,13 @@
+current directory: /var/www/mtgmanager.net/code/vendor/bundle/ruby/2.6.0/gems/json-2.2.0/ext/json
+/usr/local/rvm/rubies/ruby-2.6.4/bin/ruby -I /usr/local/rvm/rubies/ruby-2.6.4/lib/ruby/site_ruby/2.6.0 -r ./siteconf20191002-11838-1ik7bq6.rb extconf.rb
+creating Makefile
+
+current directory: /var/www/mtgmanager.net/code/vendor/bundle/ruby/2.6.0/gems/json-2.2.0/ext/json
+make "DESTDIR=" clean
+
+current directory: /var/www/mtgmanager.net/code/vendor/bundle/ruby/2.6.0/gems/json-2.2.0/ext/json
+make "DESTDIR="
+make: Nothing to be done for 'all'.
+
+current directory: /var/www/mtgmanager.net/code/vendor/bundle/ruby/2.6.0/gems/json-2.2.0/ext/json
+make "DESTDIR=" install
