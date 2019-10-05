@@ -187,9 +187,9 @@ class DeckCard {
   }
 
   html() {
-    let image = `<img src="${this.image_url}" class="ui right floated image card-image"`;
+    let image = `<img src="${this.image_url}" alt="${this.name}" class="ui right floated image card-image"`;
     if (!this.image_url) {
-      image = `<img class="ui right floated image card-image" src="/assets/placeholder-366d968b285bfb25d2067a60fa8805c3f685c3085c0d2288504f9b279b0f8c69.jpg">`;
+      image = `<img class="ui right floated image card-image" alt="placeholder card" src="/assets/placeholder-366d968b285bfb25d2067a60fa8805c3f685c3085c0d2288504f9b279b0f8c69.jpg">`;
     }
 
     let main_board_quantity = this.main_board_quantity

@@ -6,9 +6,9 @@
     <div class="ui trans-background fluid card">
       <div class="image card-image right floated">
         <% if @card.image_uris["normal"] %>
-          <img src="<%=@card.image_uris["normal"]%>", class="ui image card-image right floated">
+          <img alt="<%= @card.name %>" src="<%=@card.image_uris["normal"]%>", class="ui image card-image right floated">
         <% else %>
-          <%= image_tag("placeholder.jpg", class: "ui image card-image" )%>
+          <%= image_tag("placeholder.jpg", class: "ui image card-image" alt: "Placeholder Card" )%>
         <% end %>
       </div>
       <div class="content right floated">

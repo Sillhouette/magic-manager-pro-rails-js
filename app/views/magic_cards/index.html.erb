@@ -33,9 +33,9 @@
 
         <div class="ui right floated">
           <% if card.image_uris["normal"] %>
-            <img src="<%=card.image_uris["normal"]%>", class="ui image right floated card-image">
+            <img alt="<%= card.name %>" src="<%=card.image_uris["normal"]%>", class="ui image right floated card-image">
           <% else %>
-            <%= image_tag("placeholder.jpg", class: "ui image right floated card-image" )%>
+            <%= image_tag("placeholder.jpg", class: "ui image right floated card-image", alt: "Placeholder Card" )%>
           <% end %>
         </div>
 
