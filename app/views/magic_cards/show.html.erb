@@ -8,7 +8,7 @@
         <% if @card.image_uris["normal"] %>
           <img alt="<%= @card.name %>" src="<%=@card.image_uris["normal"]%>", class="ui image card-image right floated">
         <% else %>
-          <%= image_tag("placeholder.jpg", class: "ui image card-image" alt: "Placeholder Card" )%>
+          <%= image_tag("placeholder.jpg", class: "ui image card-image", alt: "Placeholder Card" )%>
         <% end %>
       </div>
       <div class="content right floated">
