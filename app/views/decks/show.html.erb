@@ -49,7 +49,7 @@
           </div>
 
             <div class="ui right floated">
-              <% if card = MagicCard.find_by(id: UserCard.find(card.user_card_id).magic_card_id).image_uris['normal'] %>
+              <% if card = MagicCard.find_by(id: UserCard.find(card.user_card_id).magic_card_id) && card.image_uris['normal'] %>
                 <img alt="<%= card.name %>" src="<%=card.image_uris['normal']%>", class="ui right floated image card-image"/>
               <% else %>
                 <%= image_tag("placeholder.jpg", class: 'ui right floated image card-image', alt: "Placeholder Card" )%>
