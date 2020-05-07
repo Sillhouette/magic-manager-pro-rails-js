@@ -43,7 +43,7 @@ gem 'semantic-ui-sass'
 gem 'omniauth'
 gem 'omniauth-facebook', '~> 4.0'
 gem 'dotenv-rails'
-
+gem 'eventmachine'
 gem 'thin'
 
 # Use ActiveStorage variant
